@@ -51,8 +51,8 @@ class ChatScreen extends Component {
     onSend(messages = []) {
         var self = this;
         const currentMode = this.context.currentMode;
-        const friendlyDomain = "d7c7d6a6fb06";
-        const debateDomain = "d7c7d6a6fb06";
+        const friendlyDomain = "3c7320a8064f";
+        const debateDomain = "3c7320a8064f";
 
         this.setState(previousState => ({
         messages: GiftedChat.append(previousState.messages, messages)
@@ -92,9 +92,9 @@ class ChatScreen extends Component {
     render() {
         return (
         <View style={styles.mainContainer}>
-            <CustomView hide={this.state.hideLoading} style={styles.gifView}>
+            {/* <CustomView hide={this.state.hideLoading} style={styles.gifView}>
                 <Image source={require('./public/img/typing.gif')} />
-            </CustomView>
+            </CustomView> */}
             <GiftedChat
             messages={this.state.messages}
             onSend={messages => this.onSend(messages)}
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'flex-end',
         alignContent: "flex-start",
-        marginBottom: 36,
+        marginBottom: -500,
         width: "10px",
         height: "10px",
     }
