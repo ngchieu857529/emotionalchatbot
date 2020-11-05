@@ -4,21 +4,31 @@ import { StyleSheet, Text, View, Image, Button } from 'react-native';
 
 import { ModeContext } from './ModeContext';
 
-class ModeScreen extends Component {
+class ChooseFriendlyModeScreen extends Component {
+    updateModeFriendlyOne() {
+        this.context.updateMode("Friendly One");
+        this.props.navigation.navigate('Chat')
+    }
+
+    updateModeFriendlyTwo() {
+        this.context.updateMode("Friendly Two");
+        this.props.navigation.navigate('Chat')
+    }
+
     render() {
         return (
             <View style={styles.mainContainer}>
-                <Text>Get started by selecting the mode of the chat bot!</Text>
+                <Text>Choose a mode to continue!</Text>
                 <Button
-                    title="Friendly Mode"
+                    title="User vs. Bot"
                     onPress={() =>
-                        this.props.navigation.navigate('ChooseFriendlyMode')
+                        this.updateModeFriendlyOne()
                     }
                 />
                 <Button
-                    title="Debate Mode"
+                    title="Bot vs. Bot"
                     onPress={() =>
-                        this.props.navigation.navigate('ChooseDebateMode')
+                        this.updateModeFriendlyTwo()
                     }
                 />
             </View>
@@ -26,7 +36,7 @@ class ModeScreen extends Component {
     }
 }
 
-ModeScreen.contextType = ModeContext;
+ChooseFriendlyModeScreen.contextType = ModeContext;
 
 const styles = StyleSheet.create({
     mainContainer: {
@@ -37,4 +47,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default ModeScreen;
+export default ChooseFriendlyModeScreen;

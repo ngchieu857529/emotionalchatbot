@@ -9,6 +9,7 @@ import { ModeContext } from './ModeContext';
 import ModeScreen from './ModeScreen';
 import ChatScreen from './ChatScreen';
 import ChooseDebateModeScreen from './ChooseDebateModeScreen'
+import ChooseFriendlyModeScreen from './ChooseFriendlyModeScreen'
 
 const Stack = createStackNavigator();
 class App extends Component {
@@ -19,12 +20,19 @@ class App extends Component {
     }
   }
 
+  updateMode = (mode) => {
+    this.setState({
+      currentMode: mode,
+    })
+  }
+
   render() {
     return (
       <ModeContext.Provider
         value={
           {
             currentMode: this.state.currentMode,
+            updateMode: this.updateMode,
           }
         }
       >
@@ -33,6 +41,10 @@ class App extends Component {
             <Stack.Screen
               name="Mode"
               component={ModeScreen}
+            />
+            <Stack.Screen
+              name="ChooseFriendlyMode"
+              component={ChooseFriendlyModeScreen}
             />
             <Stack.Screen
               name="ChooseDebateMode"

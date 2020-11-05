@@ -5,31 +5,46 @@ import { StyleSheet, Text, View, Image, Button } from 'react-native';
 import { ModeContext } from './ModeContext';
 
 class ChooseDebateModeScreen extends Component {
-  render() {
-    return (
-        <View style={styles.mainContainer}>
-            <Text>Choose a mode to continue the debate!</Text>
-            <Button
-                title="Biden Supporter"
-                onPress={() =>
-                    this.props.navigation.navigate('Chat')
-                }
-            />
-            <Button
-                title="Trump Supporter"
-                onPress={() =>
-                    this.props.navigation.navigate('Chat')
-                }
-            />
-            <Button
-                title="2 Bots Fighting!"
-                onPress={() =>
-                    this.props.navigation.navigate('Chat')
-                }
-            />
-        </View>
-    );
-  }
+    updateModeDebateOne() {
+        this.context.updateMode("Debate One"),
+        this.props.navigation.navigate('Chat')
+    }
+
+    updateModeDebateTwo() {
+        this.context.updateMode("Debate Two"),
+        this.props.navigation.navigate('Chat')
+    }
+
+    updateModeDebateThree() {
+        this.context.updateMode("Debate Three"),
+        this.props.navigation.navigate('Chat')
+    }
+
+    render() {
+        return (
+            <View style={styles.mainContainer}>
+                <Text>Choose a mode to continue the debate!</Text>
+                <Button
+                    title="Biden Supporter"
+                    onPress={() =>
+                        this.updateModeDebateOne()
+                    }
+                />
+                <Button
+                    title="Trump Supporter"
+                    onPress={() =>
+                        this.updateModeDebateTwo()
+                    }
+                />
+                <Button
+                    title="2 Bots Fighting!"
+                    onPress={() =>
+                        this.updateModeDebateThree()
+                    }
+                />
+            </View>
+        );
+    }
 }
 
 ChooseDebateModeScreen.contextType = ModeContext;
