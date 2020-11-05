@@ -6,9 +6,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { ModeContext } from './ModeContext';
 
-import { ModeScreen } from './ModeScreen';
-import { ChatScreen } from './ChatScreen';
-import { ChooseDebateModeScreen } from './ChooseDebateModeScreen'
+import ModeScreen from './ModeScreen';
+import ChatScreen from './ChatScreen';
+import ChooseDebateModeScreen from './ChooseDebateModeScreen'
 
 const Stack = createStackNavigator();
 class App extends Component {
