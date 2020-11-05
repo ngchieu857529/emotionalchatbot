@@ -1,5 +1,6 @@
 import 'react-native-gesture-handler';
 import React, { Component } from 'react';
+import axios from 'axios';
 import { StyleSheet, Text, View, Image, Button } from 'react-native';
 
 import { GiftedChat } from 'react-native-gifted-chat';
@@ -17,22 +18,23 @@ class ChatScreen extends Component {
             createdAt: new Date(),
             user: BOT_USER
         }
-        ]
+        ],
+        returnedData: null,
     };
 
     componentDidMount() {
-        Dialogflow_V2.setConfiguration(
-        dialogflowConfig.client_email,
-        dialogflowConfig.private_key,
-        Dialogflow_V2.LANG_ENGLISH_US,
-        dialogflowConfig.project_id
-    );
+    //     Dialogflow_V2.setConfiguration(
+    //     dialogflowConfig.client_email,
+    //     dialogflowConfig.private_key,
+    //     Dialogflow_V2.LANG_ENGLISH_US,
+    //     dialogflowConfig.project_id
+    // );
     }
 
-    handleGoogleResponse(result) {
-        let text = result.queryResult.fulfillmentMessages[0].text.text[0];
-        this.sendBotResponse(text);
-    }
+    // handleGoogleResponse(result) {
+    //     let text = result.queryResult.fulfillmentMessages[0].text.text[0];
+    //     this.sendBotResponse(text);
+    // }
 
     sendBotResponse(text) {
         var self = this;
@@ -51,16 +53,46 @@ class ChatScreen extends Component {
     }
 
     onSend(messages = []) {
+        var self = this;
+        const currentMode = this.context.currentMode;
+        const friendlyDomain = "d7c7d6a6fb06";
+        const debateDomain = "d7c7d6a6fb06";
+
         this.setState(previousState => ({
         messages: GiftedChat.append(previousState.messages, messages)
         }));
         
         let message = messages[0].text;
-        Dialogflow_V2.requestQuery(
-            message,
-            result => this.handleGoogleResponse(result),
-            error => console.log(error)
-        );
+        var url = "";
+        if (currentMode == "Friendly One") {
+            url = "http://" + friendlyDomain + ".ngrok.io/api/v1/chat?msg=" + message
+        } else if (currentMode == "Friendly Two") {
+            url = "http://" + friendlyDomain + ".ngrok.io/api/v1/autochat?topic=" + message
+        } else if (currentMode == "Debate One") {
+            url = "http://" + debateDomain + ".ngrok.io/api/v1/chat1?msg=" + message
+        } else if (currentMode == "Debate Two") {
+            url = "http://" + debateDomain + ".ngrok.io/api/v1/chat2?msg=" + message
+        } else { //currentMode == "Debate Three"
+            url = "http://" + debateDomain + ".ngrok.io/api/v1/autochat?topic=" + message
+        }
+
+        axios.get(url)
+            .then(response => {
+                console.log(response.data);
+                self.setState({
+                    returnedData: response.data
+                });
+                self.sendBotResponse(response.data);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+
+        // Dialogflow_V2.requestQuery(
+        //     message,
+        //     result => this.handleGoogleResponse(result),
+        //     error => console.log(error)
+        // );
     }
 
     render() {
@@ -72,8 +104,8 @@ class ChatScreen extends Component {
             onSend={messages => this.onSend(messages)}
             isTyping={true}
             placeholder={"Type a message"}
-            timeFormat={"h:mm A"}
-            dateFormat={"DD MMM YYYY"}
+            timeFormat={'h:mm A'}
+            dateFormat={'DD MMM YYYY'}
             loadEarlier={true}
             scrollToBottom={true}
             infiniteScroll={true}
