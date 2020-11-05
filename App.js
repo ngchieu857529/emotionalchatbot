@@ -16,7 +16,7 @@ class App extends Component {
     messages: [
       {
         _id: 1,
-        text: `Hi! I am your personal chat bot that wants to make your day brighter. How can I help you?`,
+        text: `Hello! I am your personal chat bot that wants to make your day brighter. How can I help you?`,
         createdAt: new Date(),
         user: BOT_USER
       }
