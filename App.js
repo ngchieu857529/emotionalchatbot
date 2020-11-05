@@ -20,7 +20,8 @@ class App extends Component {
         createdAt: new Date(),
         user: BOT_USER
       }
-    ]
+    ],
+    mode: "normal",
   };
 
   componentDidMount() {
@@ -63,17 +64,57 @@ class App extends Component {
     );
   }
 
+  handleNormalMode(){
+    this.setState({
+      mode: "normal"
+    })
+  }
+
+  handleAngryMode(){
+    this.setState({
+      mode: "angry"
+    })
+  }
+
   render() {
+    const mode = this.state.mode;
+
     return (
-      <View className="chatBot">
-        <GiftedChat
-          messages={this.state.messages}
-          onSend={messages => this.onSend(messages)}
-          user={{
-            _id: 1
-          }}
-        />
-      </View>
+      <div>
+        <div className="col-xs-12">
+          <div className="col-xs-6">
+            <button type="button" data-loading-text="Loading..." autoComplete="off" onClick={this.handleNormalMode.bind(this)}>
+              Normal Bot
+            </button>
+          </div>
+          <div className="col-xs-6">
+            <button type="button" data-loading-text="Loading..." autoComplete="off" onClick={this.handleAngryMode.bind(this)}>
+              Angry Bot
+            </button>
+          </div>
+        </div>
+        {mode == "normal" ? (
+        <View className="chatBot">
+          <GiftedChat
+            messages={this.state.messages}
+            onSend={messages => this.onSend(messages)}
+            user={{
+              _id: 1
+            }}
+          />
+        </View>
+        ) : (
+        <View className="chatBot">
+          <GiftedChat
+            messages={this.state.messages}
+            onSend={messages => this.onSend(messages)}
+            user={{
+              _id: 1
+            }}
+          />
+        </View>
+        )}
+      </div>
     );
   }
 }
