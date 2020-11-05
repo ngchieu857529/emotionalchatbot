@@ -1,80 +1,68 @@
+import 'react-native-gesture-handler';
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
-import { GiftedChat } from 'react-native-gifted-chat';
-import { Dialogflow_V2 } from 'react-native-dialogflow';
+import { StyleSheet, Text, View, Image, Button } from 'react-native';
 
-import { dialogflowConfig } from './env';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { ModeContext } from './ModeContext';
 
-const BOT_USER = {
-  _id: 2,
-  name: 'FAQ Bot',
-  avatar: 'https://i.imgur.com/7k12EPD.png'
-};
+import { ModeScreen } from './ModeScreen';
+import { ChatScreen } from './ChatScreen';
+import { ChooseDebateModeScreen } from './ChooseDebateModeScreen'
+
+const Stack = createStackNavigator();
 class App extends Component {
-  state = {
-    messages: [
-      {
-        _id: 1,
-        text: `Hi! I am the FAQ bot 🤖 from Jscrambler.\n\nHow may I help you with today?`,
-        createdAt: new Date(),
-        user: BOT_USER
-      }
-    ]
-  };
-
-  componentDidMount() {
-    Dialogflow_V2.setConfiguration(
-      dialogflowConfig.client_email,
-      dialogflowConfig.private_key,
-      Dialogflow_V2.LANG_ENGLISH_US,
-      dialogflowConfig.project_id
-    );
+  constructor(props) {
+    super(props)
+    this.state = {
+      currentMode: "",
+    }
   }
 
-  handleGoogleResponse(result) {
-    let text = result.queryResult.fulfillmentMessages[0].text.text[0];
-    this.sendBotResponse(text);
-}
-
-  sendBotResponse(text) {
-    let msg = {
-      _id: this.state.messages.length + 1,
-      text,
-      createdAt: new Date(),
-      user: BOT_USER
-    };
-
-    this.setState(previousState => ({
-      messages: GiftedChat.append(previousState.messages, [msg])
-    }));
-  }
-
-  onSend(messages = []) {
-    this.setState(previousState => ({
-      messages: GiftedChat.append(previousState.messages, messages)
-    }));
-
-    let message = messages[0].text;
-    Dialogflow_V2.requestQuery(
-      message,
-      result => this.handleGoogleResponse(result),
-      error => console.log(error)
-    );
+  updateMode = (mode) => {
+    this.setState({
+      currentMode: mode,
+    })
   }
 
   render() {
     return (
-      <View style={{ flex: 1, backgroundColor: '#fff' }}>
-        <GiftedChat
-          messages={this.state.messages}
-          onSend={messages => this.onSend(messages)}
-          user={{
-            _id: 1
-          }}
-        />
-      </View>
+      <ModeContext.Provider
+        value={
+          {
+            currentMode: this.state.currentMode,
+            updateMode: this.updateMode,
+          }
+        }
+      >
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen
+              name="Mode"
+              component={ModeScreen}
+            />
+            <Stack.Screen
+              name="ChooseDebateMode"
+              component={ChooseDebateModeScreen}
+            />
+            <Stack.Screen
+              name="Chat"
+              component={ChatScreen}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </ModeContext.Provider>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  mainContainer: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }
+})
 
 export default App;
