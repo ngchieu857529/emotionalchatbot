@@ -12,21 +12,18 @@ class ChooseDebateModeScreen extends Component {
             <Button
                 title="Biden Supporter"
                 onPress={() =>
-                    this.context.updateMode("Biden Supporter"),
                     this.props.navigation.navigate('Chat')
                 }
             />
             <Button
                 title="Trump Supporter"
                 onPress={() =>
-                    this.context.updateMode("Trump Supporter"),
                     this.props.navigation.navigate('Chat')
                 }
             />
             <Button
                 title="2 Bots Fighting!"
                 onPress={() =>
-                    this.context.updateMode("2 Bots Fighting!"),
                     this.props.navigation.navigate('Chat')
                 }
             />

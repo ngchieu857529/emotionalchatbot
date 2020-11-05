@@ -19,19 +19,12 @@ class App extends Component {
     }
   }
 
-  updateMode = (mode) => {
-    this.setState({
-      currentMode: mode,
-    })
-  }
-
   render() {
     return (
       <ModeContext.Provider
         value={
           {
             currentMode: this.state.currentMode,
-            updateMode: this.updateMode,
           }
         }
       >

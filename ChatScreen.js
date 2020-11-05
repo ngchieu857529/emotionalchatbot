@@ -63,9 +63,6 @@ class ChatScreen extends Component {
     render() {
         return (
         <View style={styles.mainContainer}>
-            <View style={styles.mode}>
-                {this.context.currentMode} Mode!!!
-            </View>
             <GiftedChat
             messages={this.state.messages}
             onSend={messages => this.onSend(messages)}

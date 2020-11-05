@@ -12,14 +12,12 @@ class ModeScreen extends Component {
             <Button
                 title="Friendly Mode"
                 onPress={() =>
-                    this.context.updateMode("Friendly"),
                     this.props.navigation.navigate('Chat')
                 }
             />
             <Button
                 title="Debate Mode"
                 onPress={() =>
-                    this.context.updateMode("Debate"),
                     this.props.navigation.navigate('ChooseDebateMode')
                 }
             />
