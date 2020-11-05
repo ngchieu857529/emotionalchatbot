@@ -8,19 +8,24 @@ import { Dialogflow_V2 } from 'react-native-dialogflow';
 
 import { dialogflowConfig } from './env';
 import { ModeContext } from './ModeContext';
+import CustomView from './CustomView'
 
 class ChatScreen extends Component {
-    state = {
-        messages: [
-        {
-            _id: 1,
-            text: `Hello! I am here to assist you and make your day better. \n\nHow are you doing?`,
-            createdAt: new Date(),
-            user: BOT_USER
-        }
-        ],
-        returnedData: null,
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            messages: [
+            {
+                _id: 1,
+                text: `Hello! I am here to assist you and make your day better. \n\nHow are you doing?`,
+                createdAt: new Date(),
+                user: BOT_USER
+            }
+            ],
+            returnedData: null,
+            hideLoading: true,
+        };
+    }
 
     componentDidMount() {
     //     Dialogflow_V2.setConfiguration(
@@ -49,6 +54,9 @@ class ChatScreen extends Component {
             self.setState(previousState => ({
             messages: GiftedChat.append(previousState.messages, [msg])
             }));
+            self.setState({
+                hideLoading: true,
+            });
         }, 3000)
     }
 
@@ -62,6 +70,10 @@ class ChatScreen extends Component {
         messages: GiftedChat.append(previousState.messages, messages)
         }));
         
+        this.setState({
+            hideLoading: false,
+        });
+
         let message = messages[0].text;
         var url = "";
         if (currentMode == "Friendly One") {
@@ -99,6 +111,10 @@ class ChatScreen extends Component {
         return (
         <View style={styles.mainContainer}>
             <Text style={styles.mode}>{this.context.currentMode} Mode</Text>
+            <CustomView hide={this.state.hideLoading}>
+                <Text>Loading GIF here</Text>
+                <Image source={require('./public/img/typing.gif')} />
+            </CustomView>
             <GiftedChat
             messages={this.state.messages}
             onSend={messages => this.onSend(messages)}
