@@ -4,7 +4,6 @@ import { GiftedChat } from 'react-native-gifted-chat';
 import { Dialogflow_V2 } from 'react-native-dialogflow';
 
 import { dialogflowConfig } from './env';
-import './public/css/globalStyleSheet.css';
 
 const BOT_USER = {
   _id: 2,
