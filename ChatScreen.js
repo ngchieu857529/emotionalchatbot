@@ -51,13 +51,14 @@ class ChatScreen extends Component {
         this.setState(previousState => ({
         messages: GiftedChat.append(previousState.messages, messages)
         }));
-
-        let message = messages[0].text;
-        Dialogflow_V2.requestQuery(
-        message,
-        result => this.handleGoogleResponse(result),
-        error => console.log(error)
-        );
+        setTimeout(function(){
+            let message = messages[0].text;
+            Dialogflow_V2.requestQuery(
+            message,
+            result => this.handleGoogleResponse(result),
+            error => console.log(error)
+            );
+        }, 3000)
     }
 
     render() {
@@ -67,6 +68,14 @@ class ChatScreen extends Component {
             <GiftedChat
             messages={this.state.messages}
             onSend={messages => this.onSend(messages)}
+            isTyping={true}
+            placeholder={"Type a message"}
+            timeFormat={"h:mm A"}
+            dateFormat={"DD MMM YYYY"}
+            loadEarlier={true}
+            isLoadingEarlier={true}
+            scrollToBottom={true}
+            infiniteScroll={true}
             user={{
                 _id: 1
             }}
