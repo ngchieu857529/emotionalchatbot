@@ -4,9 +4,7 @@ import axios from 'axios';
 import { StyleSheet, Text, View, Image, Button } from 'react-native';
 
 import { GiftedChat } from 'react-native-gifted-chat';
-import { Dialogflow_V2 } from 'react-native-dialogflow';
 
-import { dialogflowConfig } from './env';
 import { ModeContext } from './ModeContext';
 import CustomView from './CustomView'
 
@@ -28,18 +26,8 @@ class ChatScreen extends Component {
     }
 
     componentDidMount() {
-    //     Dialogflow_V2.setConfiguration(
-    //     dialogflowConfig.client_email,
-    //     dialogflowConfig.private_key,
-    //     Dialogflow_V2.LANG_ENGLISH_US,
-    //     dialogflowConfig.project_id
-    // );
-    }
 
-    // handleGoogleResponse(result) {
-    //     let text = result.queryResult.fulfillmentMessages[0].text.text[0];
-    //     this.sendBotResponse(text);
-    // }
+    }
 
     sendBotResponse(text) {
         var self = this;
@@ -99,22 +87,16 @@ class ChatScreen extends Component {
             .catch(error => {
                 console.log(error);
             });
-
-        // Dialogflow_V2.requestQuery(
-        //     message,
-        //     result => this.handleGoogleResponse(result),
-        //     error => console.log(error)
-        // );
     }
 
     render() {
         return (
         <View style={styles.mainContainer}>
-            <Text style={styles.mode}>{this.context.currentMode} Mode</Text>
-            <CustomView hide={this.state.hideLoading}>
-                <Text>Loading GIF here</Text>
-                <Image source={require('./public/img/typing.gif')} />
-            </CustomView>
+            <View style={styles.gifView}>
+                <CustomView hide={this.state.hideLoading}>
+                    <Image source={require('./public/img/typing.gif')} />
+                </CustomView>
+            </View>
             <GiftedChat
             messages={this.state.messages}
             onSend={messages => this.onSend(messages)}
@@ -147,8 +129,13 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
     },
-    mode: {
-        color: 'red',
+    gifView: {
+        flex: 1,
+        justifyContent: 'flex-end',
+        alignContent: "flex-start",
+        marginBottom: 36,
+        width: "10px",
+        height: "10px",
     }
 })
 
