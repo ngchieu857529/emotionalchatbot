@@ -35,6 +35,7 @@ class ChatScreen extends Component {
     }
 
     sendBotResponse(text) {
+        var self = this;
         let msg = {
         _id: this.state.messages.length + 1,
         text,
@@ -43,9 +44,9 @@ class ChatScreen extends Component {
         };
         
         setTimeout(function(){
-        this.setState(previousState => ({
-        messages: GiftedChat.append(previousState.messages, [msg])
-        }));
+            self.setState(previousState => ({
+            messages: GiftedChat.append(previousState.messages, [msg])
+            }));
         }, 3000)
     }
 
@@ -56,9 +57,9 @@ class ChatScreen extends Component {
         
         let message = messages[0].text;
         Dialogflow_V2.requestQuery(
-        message,
-        result => this.handleGoogleResponse(result),
-        error => console.log(error)
+            message,
+            result => this.handleGoogleResponse(result),
+            error => console.log(error)
         );
     }
 
