@@ -92,11 +92,9 @@ class ChatScreen extends Component {
     render() {
         return (
         <View style={styles.mainContainer}>
-            <View style={styles.gifView}>
-                <CustomView hide={this.state.hideLoading}>
-                    <Image source={require('./public/img/typing.gif')} />
-                </CustomView>
-            </View>
+            <CustomView hide={this.state.hideLoading} style={styles.gifView}>
+                <Image source={require('./public/img/typing.gif')} />
+            </CustomView>
             <GiftedChat
             messages={this.state.messages}
             onSend={messages => this.onSend(messages)}

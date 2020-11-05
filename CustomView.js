@@ -25,6 +25,7 @@ CustomView.propTypes = {
         PropTypes.element,
         ])),
     ]).isRequired,
+    style: ViewPropTypes.style,
     hide: PropTypes.bool,
 };
 
