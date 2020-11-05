@@ -7,15 +7,15 @@ import { dialogflowConfig } from './env';
 
 const BOT_USER = {
   _id: 2,
-  name: 'FAQ Bot',
-  avatar: 'https://i.imgur.com/7k12EPD.png'
+  name: 'Emotional Bot',
+  avatar: 'https://i.imgur.com/7k12EPD.png' //Replace image here
 };
 class App extends Component {
   state = {
     messages: [
       {
         _id: 1,
-        text: `Hi! I am the FAQ bot 🤖 from Jscrambler.\n\nHow may I help you with today?`,
+        text: `Hi! I am your personal chat bot that wants to make your day brighter. How can I help you?`,
         createdAt: new Date(),
         user: BOT_USER
       }
@@ -64,7 +64,7 @@ class App extends Component {
 
   render() {
     return (
-      <View style={{ flex: 1, backgroundColor: '#fff' }}>
+      <View className="chatBot">
         <GiftedChat
           messages={this.state.messages}
           onSend={messages => this.onSend(messages)}
