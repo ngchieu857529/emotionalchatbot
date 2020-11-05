@@ -41,24 +41,25 @@ class ChatScreen extends Component {
         createdAt: new Date(),
         user: BOT_USER
         };
-
+        
+        setTimeout(function(){
         this.setState(previousState => ({
         messages: GiftedChat.append(previousState.messages, [msg])
         }));
+        }, 3000)
     }
 
     onSend(messages = []) {
         this.setState(previousState => ({
         messages: GiftedChat.append(previousState.messages, messages)
         }));
-        setTimeout(function(){
-            let message = messages[0].text;
-            Dialogflow_V2.requestQuery(
-            message,
-            result => this.handleGoogleResponse(result),
-            error => console.log(error)
-            );
-        }, 3000)
+        
+        let message = messages[0].text;
+        Dialogflow_V2.requestQuery(
+        message,
+        result => this.handleGoogleResponse(result),
+        error => console.log(error)
+        );
     }
 
     render() {
@@ -73,7 +74,6 @@ class ChatScreen extends Component {
             timeFormat={"h:mm A"}
             dateFormat={"DD MMM YYYY"}
             loadEarlier={true}
-            isLoadingEarlier={true}
             scrollToBottom={true}
             infiniteScroll={true}
             user={{
