@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     },
     headerText: {
         color: "white",
-        fontSize: "30px"
+        fontSize: 30
     },
     userVBotButton: {
         width: "65%",

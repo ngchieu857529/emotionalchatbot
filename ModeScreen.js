@@ -9,21 +9,29 @@ class ModeScreen extends Component {
         return (
             <View style={styles.mainContainer}>
                 <Image source={require('./public/img/welcome.gif')} style={styles.backgroundImage}/>
-                <Text style={styles.headerText}>Get started by selecting the mode of the chat bot!</Text>
-                <View style={styles.friendlyButton}>
+                <Text style={styles.headerText}>Get started by selecting the mode of the chat bot!
+					{"\n"}<Text style = {[{fontSize: 24}]}>Hint:
+				
+				
+				</Text>
+				
+				</Text>
+                <View style={[{ width: "65%", margin: 10}]}>
                     <Button
                         title="Friendly Mode"
                         onPress={() =>
                             this.props.navigation.navigate('ChooseFriendlyMode')
                         }
+						color="limegreen"
                     />
                 </View>
-				<View style={styles.debateButton}> 
+				<View style={[{ width: "65%", margin: 10}]}> 
 					<Button
 						title="Critical Mode"
 						onPress={() =>
 							this.props.navigation.navigate('ChooseDebateMode')
 						}
+						color = 'orange'
                     />
 			    </View>
             </View>
@@ -41,19 +49,17 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     headerText: {
-        color: "white",
-        fontSize: "30px"
+        color: "skyblue",
+        fontSize: 30,
+		backgroundColor: 'white',
+		marginBottom: 50,
+		borderStyle: "solid",
+		borderColor: 'skyblue',
+		borderWidth: 1,
+        textAlign: 'center',
+		
     },
-    friendlyButton: {
-        width: "65%",
-        height: "10%",
-        backgroundColor: "limegreen"
-    },
-    debateButton: {
-        width: "65%",
-        height: "10%",
-        backgroundColor: "orange"
-    },
+
     backgroundImage: {
         width: '100%',
         height: '100%',

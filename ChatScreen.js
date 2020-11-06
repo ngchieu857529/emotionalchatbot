@@ -253,16 +253,16 @@ class ChatScreen extends Component {
 
         if (currentMode == "Friendly One") {
             this.initialBotRender();
-            axios.get("http://" + friendlyDomain + ".ngrok.io/api/v1/reset");
+            axios.get(friendlyDomain + "/api/v1/reset");
         } else if (currentMode == "Debate One") {
             this.initialBotRender();
-            axios.get("http://" + debateDomain + ".ngrok.io/api/v1/reset?model=" + botProfiles[this.state.currentImageIndex][1]);
+            axios.get(debateDomain + "/api/v1/reset?model=" + botProfiles[this.state.currentImageIndex][1]);
         } else if (currentMode == "Friendly Two") {
             this.initialBotRender();
-            axios.get("http://" + friendlyDomain + ".ngrok.io/api/v1/reset");
+            axios.get(friendlyDomain + "/api/v1/reset");
         } else if (currentMode == "Debate Two") {
             this.initialBotRender();
-            axios.get("http://" + debateDomain + ".ngrok.io/api/v1/reset?model=" + botProfiles[this.state.currentImageIndex][1]); //TODO: Fix Link
+            axios.get(debateDomain + "/api/v1/reset?model=" + botProfiles[this.state.currentImageIndex][1]); //TODO: Fix Link
         }
 
         this.setState({
