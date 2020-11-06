@@ -18,20 +18,27 @@ class ChatScreen extends Component {
             hideLoading: true,
             gifPos: -10,
             currentImageIndex: 0,
+            currentImageTwoIndex: 0,
             canSendMessage: true,
-			
+            friendlyDomain: "1df454a3372e",
+            debateDomain: "e77965f8135d",
         };
     }
 
     componentDidMount() {
-        this.changeBotAvatar();
-        this.returnBotAvatar();
+        this.initialBotRender();
     }
 
-    changeBotAvatar() {
-        const randomNumber = Math.floor(Math.random() * botProfiles.length);
+    getRandomNumber () {
+        return Math.floor(Math.random() * botProfiles.length)
+    }
+
+    initialBotRender () {
+        const randomNumber = this.getRandomNumber();
+        const randomNumberTwo = this.getRandomNumber();
         this.setState({
             currentImageIndex: randomNumber,
+            currentImageTwoIndex: randomNumberTwo,
             messages: [
                 {
                     _id: 1,
@@ -39,11 +46,25 @@ class ChatScreen extends Component {
                     createdAt: new Date(),
                     user: {
                         _id: 2,
-                        name: 'null',
+                        name: botProfiles[randomNumber][0],
                         avatar: botProfiles[randomNumber][2]
                     }
                 }
             ],
+        });
+    }
+
+    changeBotProfile() {
+        const randomNumber = this.getRandomNumber();
+        this.setState({
+            currentImageIndex: randomNumber,
+        });
+    }
+
+    changeBotTwoProfile() {
+        const randomNumber = this.getRandomNumber();
+        this.setState({
+            currentImageTwoIndex: randomNumber,
         });
     }
 
@@ -52,7 +73,15 @@ class ChatScreen extends Component {
     }
 
     returnBotName() {
-        return (botNames[0])
+        return (botProfiles[this.state.currentImageIndex][0]);
+    }
+
+    returnBotTwoAvatar() {
+        return (botProfiles[this.state.currentImageTwoIndex][2]);
+    }
+
+    returnBotTwoName() {
+        return (botProfiles[this.state.currentImageTwoIndex][0]);
     }
 
     sendBotResponse(text) {
@@ -101,8 +130,8 @@ class ChatScreen extends Component {
                 createdAt: new Date(),
                 user: {
                     _id: 1,
-                    name: this.returnBotName(),
-                    avatar: this.returnBotAvatar()
+                    name: this.returnBotTwoName(),
+                    avatar: this.returnBotTwoAvatar()
                 }
             };
 
@@ -132,8 +161,8 @@ class ChatScreen extends Component {
         var self = this;
         const canSendMessage = this.state.canSendMessage;
         const currentMode = this.context.currentMode;
-        const friendlyDomain = "1df454a3372e";
-        const debateDomain = "816f892908aa";
+        const friendlyDomain = this.state.friendlyDomain;
+        const debateDomain = this.state.debateDomain;
 
         if (canSendMessage == false) {
             alert('Conversation Happening! Cannot send message.')
@@ -161,7 +190,7 @@ class ChatScreen extends Component {
         } else if (currentMode == "Debate One") {
             url = "http://" + debateDomain + ".ngrok.io/api/v1/chat?msg=" + message
         } else { //currentMode == "Debate Two"
-            url = "http://" + debateDomain + ".ngrok.io/api/v1/autochat?topic=" + message
+            url = "http://" + debateDomain + ".ngrok.io/api/v1/autochat?topic=" + message + "&model1=" + botProfiles[this.state.currentImageIndex][1] + "&model2=" + botProfiles[this.state.currentImageIndexTwo][1]
             Keyboard.dismiss()
         }
 
@@ -181,6 +210,19 @@ class ChatScreen extends Component {
             .catch(error => {
                 console.log(error);
             });
+    }
+
+    onResetChat(currentMode) {
+        const friendlyDomain = this.state.friendlyDomain;
+        const debateDomain = this.state.debateDomain;
+
+        if (currentMode == "Friendly One") {
+            this.initialBotRender();
+            axios.get("http://" + friendlyDomain + ".ngrok.io/api/v1/reset");
+        } else if (currentMode == "Debate One") {
+            this.initialBotRender();
+            axios.get("http://" + debateDomain + ".ngrok.io/api/v1/reset?model=" + botProfiles[this.state.currentImageIndex][1])
+        }    
     }
 
     render() {
@@ -208,6 +250,13 @@ class ChatScreen extends Component {
                 <ImageBackground source={require('./public/img/typing.gif')} style={{width: 50, height: 50, justifyContent: 'center', alignContent: 'center',}}/>
             </CustomView> */}
             <ImageBackground source={require('./public/img/welcome.gif')} style={{width: '50%', height: '50%'}}/>
+            
+            {currentMode == "Friendly One" || currentMode == "Debate One" && (
+            <Button
+                onPress={() => this.onResetChat(currentMode)}
+                title="Start New Conversation"/>
+            )}
+
             <GiftedChat
             messages={this.state.messages}
             onSend={messages => this.onSend(messages)}
