@@ -15,31 +15,20 @@ class ChooseDebateModeScreen extends Component {
         this.props.navigation.navigate('Chat')
     }
 
-    updateModeDebateThree() {
-        this.context.updateMode("Debate Three"),
-        this.props.navigation.navigate('Chat')
-    }
-
     render() {
         return (
             <View style={styles.mainContainer}>
                 <Text>Choose a mode to continue the debate!</Text>
                 <Button
-                    title="Biden Supporter"
+                    title="User vs Bot"
                     onPress={() =>
                         this.updateModeDebateOne()
                     }
                 />
                 <Button
-                    title="Trump Supporter"
-                    onPress={() =>
-                        this.updateModeDebateTwo()
-                    }
-                />
-                <Button
                     title="2 Bots Fighting!"
                     onPress={() =>
-                        this.updateModeDebateThree()
+                        this.updateModeDebateTwo()
                     }
                 />
             </View>

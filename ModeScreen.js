@@ -16,7 +16,7 @@ class ModeScreen extends Component {
                     }
                 />
                 <Button
-                    title="Debate Mode"
+                    title="Critical Mode"
                     onPress={() =>
                         this.props.navigation.navigate('ChooseDebateMode')
                     }
