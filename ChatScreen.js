@@ -225,7 +225,13 @@ class ChatScreen extends Component {
 
 ChatScreen.contextType = ModeContext;
 
-const avatars = [
+const avatars ={
+	'./public/img/avatar1.jpg': ['John', 'Republican'],
+	'./public/img/avatar2.jpg': ['Andrew', 'Democrat'],
+}
+console.log(avatars['./public/img/avatar1.jpg'][0] + ' ' + avatars['./public/img/avatar1.jpg'][1])
+
+/*
     './public/img/avatar1.jpg',
     './public/img/avatar2.jpg',
     './public/img/avatar3.jpg',
@@ -234,7 +240,7 @@ const avatars = [
     './public/img/avatar6.jpg',
     './public/img/avatar7.jpg',
     './public/img/avatar8.jpg',
-];
+];*/
 
 const botNames = [
     'A',
