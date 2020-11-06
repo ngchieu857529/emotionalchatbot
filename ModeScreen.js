@@ -1,8 +1,8 @@
 import 'react-native-gesture-handler';
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image, Button } from 'react-native';
+import { StyleSheet, Text, View, Image, Button, ImageBackground } from 'react-native';
 
-import { ModeContext } from './ModeContext';
+import { ModeContext,  } from './ModeContext';
 
 class ModeScreen extends Component {
     render() {
@@ -17,13 +17,25 @@ class ModeScreen extends Component {
                     }
                     style={styles.button}
                 />
-                <Button
-                    title="Critical Mode"
-                    onPress={() =>
-                        this.props.navigation.navigate('ChooseDebateMode')
-                    }
-                    style={styles.button}
-                />
+				<View> 
+					<Button
+						title="Critical Mode"
+						onPress={() =>
+							this.props.navigation.navigate('ChooseDebateMode')
+						}
+		   
+						/>
+			 </View>
+				<View style={[{ width: "90%", margin: 10, backgroundColor: "red" }]}>
+          <Button
+            onPress={() =>
+							this.props.navigation.navigate('ChooseDebateMode')
+						}
+            title="Button Three"
+            color="#FF3D00"
+          />
+        </View>
+                
             </View>
         );
     }

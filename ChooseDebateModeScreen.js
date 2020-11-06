@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image, Button } from 'react-native';
+import { StyleSheet, Text, View, Image, Button, ImageBackground} from 'react-native';
 
 import { ModeContext } from './ModeContext';
 
@@ -18,22 +18,27 @@ class ChooseDebateModeScreen extends Component {
     render() {
         return (
             <View style={styles.mainContainer}>
-                <ImageBackground source={require('./public/img/US_Flag.jpg')} style={styles.backgroundImage}/>
+                <Image source={require('./public/img/US_Flag.jpg')} style={styles.bg}/>
                 <Text>Choose a mode to continue the debate!</Text>
-                <Button
+                <Button style={styles.mainButton}
                     title="User vs Bot"
                     onPress={() =>
                         this.updateModeDebateOne()
                     }
-                    style={styles.button}
+					color = 'blue'
+                    
                 />
+				<View style={{height: 10}}></View>
                 <Button
                     title="2 Bots Fighting!"
                     onPress={() =>
                         this.updateModeDebateTwo()
                     }
-                    style={styles.button}
+					
+					color = "darkred"
+					size = "100"
                 />
+				
             </View>
         );
     }
@@ -47,9 +52,13 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
+		opacity: 1,
     },
-    button: {
-        margin: 20
+    mainButton: {
+        margin: 100,
+		opacity: 0.7,
+		color:'red',
+		backgroundColor: 'red'
     },
     backgroundImage: {
         flex: 1,
@@ -58,7 +67,16 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         opacity: 0.5,
-    }
+    },
+	bg: {
+		width: '100%',
+        height: '100%',
+		position: "absolute",
+		top: 0,
+		left:0,
+		bottom:0,
+		right:0, opacity: 0.5
+	}
 })
 
 export default ChooseDebateModeScreen;

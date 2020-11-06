@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import KeyboardListener from 'react-native-keyboard-listener';
 import Tts from 'react-native-tts';
-import { StyleSheet, Text, View, ImageBackground, Button, Keyboard } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground, Button, Keyboard, Image } from 'react-native';
 
 import { GiftedChat } from 'react-native-gifted-chat';
 
@@ -22,8 +22,8 @@ class ChatScreen extends Component {
             currentImageTwoIndex: 0,
             canSendMessage: true,
             botHasReset: true,
-            friendlyDomain: "1df454a3372e",
-            debateDomain: "77d300b4173e",
+            friendlyDomain: "fd291f497b7e",
+            debateDomain: "7b97110b0ca7",
         };
     }
 
@@ -125,7 +125,6 @@ class ChatScreen extends Component {
     handleBotVsBotMode(response) {
         var self = this;
         var messageList = [];
-
         for (var i = 0; i < response[0].length; i+=2) {
             const text1 = response[0][i];
             const text2 = response[0][i+1];
@@ -150,18 +149,19 @@ class ChatScreen extends Component {
                     avatar: this.returnBotTwoAvatar()
                 }
             };
-
-            messageList.concat(msg1)
-            messageList.concat(msg2)
+		
+            messageList.push(msg1)
+            messageList.push(msg2)
+			console.log(messageList.length)
         }
-
+		console.log(messageList.length)
         messageList.map(function(message) {
-            setTimeout(function(){
+            // setTimeout(function(){
                 self.setState(previousState => ({
                     messages: GiftedChat.append(previousState.messages, [message])
                 }));
                 Tts.speak(message.text);
-            }, 3000)
+            // }, 3000)
         })
         this.setState({
             hideLoading: true,
@@ -287,19 +287,20 @@ class ChatScreen extends Component {
             </CustomView> */}
 
             {currentMode == "Default" && (
-            <ImageBackground source={require('./public/img/welcome.gif')} style={styles.backgroundImage}/>
+            <Image source={require('./public/img/welcome.gif')} style={styles.bg}/>
             )}
             {(currentMode == "Friendly One" || currentMode == "Friendly Two") && (
-            <ImageBackground source={require('./public/img/welcome.gif')} style={styles.backgroundImage}/>
+            <Image source={require('./public/img/welcome.gif')} style={styles.bg}/>
             )}
             {(currentMode == "Debate One" || currentMode == "Debate Two") && (
-            <ImageBackground source={require('./public/img/US_Flag.jpg')} style={styles.backgroundImage}/>
+            <Image source={require('./public/img/US_Flag.jpg')} style={styles.bg}/>
             )}
             
             <Button
                 onPress={() => this.onResetChat(currentMode)}
                 title="Start New Conversation"
                 style={styles.startNewButton}
+				
             />
 
             <GiftedChat
@@ -357,9 +358,18 @@ const styles = StyleSheet.create({
     startNewButton: {
         width: '20%',
         height: '10%',
-        justifyContent: "flex-start",
+        justifyContent: "flex-end",
         alignItems: "flex-end",
-    }
+    },
+	bg: {
+		width: '100%',
+        height: '100%',
+		position: "absolute",
+		top: 0,
+		left:0,
+		bottom:0,
+		right:0, opacity: 0.5
+	}
 })
 
 export default ChatScreen;
