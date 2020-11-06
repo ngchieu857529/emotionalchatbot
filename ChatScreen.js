@@ -1,7 +1,7 @@
 import 'react-native-gesture-handler';
 import React, { Component } from 'react';
 import axios from 'axios';
-import { StyleSheet, Text, View, Image, Button } from 'react-native';
+import { StyleSheet, Text, View, Image, Button, Keyboard } from 'react-native';
 
 import { GiftedChat } from 'react-native-gifted-chat';
 
@@ -27,6 +27,24 @@ class ChatScreen extends Component {
 
     componentDidMount() {
 
+    }
+
+    componentWillMount () {
+        this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow);
+        this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this._keyboardDidHide);
+    }
+    
+    componentWillUnmount () {
+        this.keyboardDidShowListener.remove();
+        this.keyboardDidHideListener.remove();
+    }
+    
+    _keyboardDidShow () {
+        alert('Keyboard Shown');
+    }
+    
+    _keyboardDidHide () {
+        alert('Keyboard Hidden');
     }
 
     sendBotResponse(text) {
@@ -92,9 +110,9 @@ class ChatScreen extends Component {
     render() {
         return (
         <View style={styles.mainContainer}>
-            {/* <CustomView hide={this.state.hideLoading} style={styles.gifView}>
+            <CustomView hide={this.state.hideLoading} style={styles.gifView}>
                 <Image source={require('./public/img/typing.gif')} />
-            </CustomView> */}
+            </CustomView>
             <GiftedChat
             messages={this.state.messages}
             onSend={messages => this.onSend(messages)}
@@ -128,12 +146,11 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
     },
     gifView: {
-        flex: 1,
         justifyContent: 'flex-end',
         alignContent: "flex-start",
         marginBottom: -500,
-        width: "10px",
-        height: "10px",
+        width: 10,
+        height: 10,
     }
 })
 
