@@ -22,6 +22,7 @@ class ChatScreen extends Component {
             ],
             returnedData: null,
             hideLoading: true,
+            gifPos: -500,
         };
     }
 
@@ -40,11 +41,15 @@ class ChatScreen extends Component {
     }
     
     _keyboardDidShow () {
-        alert('Keyboard Shown');
+        this.setState({
+            gifPos: -500
+        })
     }
     
     _keyboardDidHide () {
-        alert('Keyboard Hidden');
+        this.setState({
+            gifPos: 0
+        })
     }
 
     sendBotResponse(text) {
@@ -148,9 +153,9 @@ const styles = StyleSheet.create({
     gifView: {
         justifyContent: 'flex-end',
         alignContent: "flex-start",
-        marginBottom: -500,
-        width: 10,
-        height: 10,
+        marginBottom: this.state.gifPos,
+        width: 100,
+        height: 100,
     }
 })
 
