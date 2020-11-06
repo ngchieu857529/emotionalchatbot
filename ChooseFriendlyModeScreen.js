@@ -18,18 +18,21 @@ class ChooseFriendlyModeScreen extends Component {
     render() {
         return (
             <View style={styles.mainContainer}>
+                <ImageBackground source={require('./public/img/welcome.gif')} style={styles.backgroundImage}/>
                 <Text>Choose a mode to continue!</Text>
                 <Button
                     title="User vs. Bot"
                     onPress={() =>
                         this.updateModeFriendlyOne()
                     }
+                    style={styles.button}
                 />
                 <Button
                     title="Bot vs. Bot"
                     onPress={() =>
                         this.updateModeFriendlyTwo()
                     }
+                    style={styles.button}
                 />
             </View>
         );
@@ -44,6 +47,17 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    button: {
+        margin: 20
+    },
+    backgroundImage: {
+        flex: 1,
+        width: '100%',
+        height: '100%',
+        justifyContent: "center",
+        alignItems: "center",
+        opacity: 0.5,
     }
 })
 

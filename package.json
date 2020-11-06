@@ -23,6 +23,7 @@
     "react-native-reanimated": "^1.13.1",
     "react-native-safe-area-context": "^3.1.8",
     "react-native-screens": "^2.13.0",
+    "react-native-tts": "^3.2.0",
     "react-native-voice": "^0.3.0"
   },
   "devDependencies": {

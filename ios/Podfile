@@ -10,6 +10,8 @@ target 'EmotionalChatbot' do
 
   pod 'react-native-dialogflow', :path => '../node_modules/react-native-dialogflow'
 
+  pod 'TextToSpeech', :path => '../node_modules/react-native-tts'
+
   target 'EmotionalChatbotTests' do
     inherit! :complete
     # Pods for testing
