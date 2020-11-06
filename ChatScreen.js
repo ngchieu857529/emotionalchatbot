@@ -22,7 +22,7 @@ class ChatScreen extends Component {
             currentImageTwoIndex: 0,
             canSendMessage: true,
             botHasReset: true,
-            friendlyDomain: "fd291f497b7e",
+            friendlyDomain: "http://630614236099.ngrok.io",
             debateDomain: "7b97110b0ca7",
         };
     }
@@ -216,14 +216,14 @@ class ChatScreen extends Component {
         if (currentMode == "Default") {
             url = ""
         } else if (currentMode == "Friendly One") {
-            url = "http://" + friendlyDomain + ".ngrok.io/api/v1/chat?msg=" + message
+            url = friendlyDomain + "/api/v1/chat?msg=" + message
         } else if (currentMode == "Friendly Two") {
-            url = "http://" + friendlyDomain + ".ngrok.io/api/v1/autochat?topic=" + message
+            url = friendlyDomain + "/api/v1/autochat?topic=" + message
             Keyboard.dismiss()
         } else if (currentMode == "Debate One") {
-            url = "http://" + debateDomain + ".ngrok.io/api/v1/chat?msg=" + message
+            url = debateDomain + "/api/v1/chat?msg=" + message
         } else { //currentMode == "Debate Two"
-            url = "http://" + debateDomain + ".ngrok.io/api/v1/autochat?topic=" + message + "&model1=" + botProfiles[this.state.currentImageIndex][1] 
+            url = debateDomain + "/api/v1/autochat?topic=" + message + "&model1=" + botProfiles[this.state.currentImageIndex][1] 
 																						+ "&model2=" + botProfiles[this.state.currentImageTwoIndex][1]
 			Keyboard.dismiss()
         }
