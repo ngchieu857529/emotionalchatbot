@@ -26,7 +26,7 @@ class ModeScreen extends Component {
 		   
 						/>
 			 </View>
-				<View style={[{ width: "90%", margin: 10, backgroundColor: "red" }]}>
+				<View style={[{ width: "90%", margin: 10, backgroundColor: "red"}]}>
           <Button
             onPress={() =>
 							this.props.navigation.navigate('ChooseDebateMode')
