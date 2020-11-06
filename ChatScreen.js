@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import KeyboardListener from 'react-native-keyboard-listener';
 import Tts from 'react-native-tts';
-import { StyleSheet, Text, View, ImageBackground, Button, Keyboard, Image } from 'react-native';
+import { StyleSheet, Text, View, Button, Keyboard, Image } from 'react-native';
 
 import { GiftedChat } from 'react-native-gifted-chat';
 
@@ -298,9 +298,7 @@ class ChatScreen extends Component {
             
             <Button
                 onPress={() => this.onResetChat(currentMode)}
-                title="Start New Conversation"
-                style={styles.startNewButton}
-				
+                title="Start New Conversation"	
             />
 
             <GiftedChat
@@ -348,28 +346,14 @@ const styles = StyleSheet.create({
         height: 100,
     },
     backgroundImage: {
-        flex: 1,
         width: '100%',
-        height: '100%',
-        justifyContent: "center",
-        alignItems: "center",
-        opacity: 0.5,
-    },
-    startNewButton: {
-        width: '20%',
-        height: '10%',
-        justifyContent: "flex-end",
-        alignItems: "flex-end",
-    },
-	bg: {
-		width: '100%',
         height: '100%',
 		position: "absolute",
 		top: 0,
 		left:0,
 		bottom:0,
 		right:0, opacity: 0.5
-	}
+    },
 })
 
 export default ChatScreen;

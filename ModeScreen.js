@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image, Button, ImageBackground } from 'react-native';
+import { StyleSheet, Text, View, Image, Button } from 'react-native';
 
 import { ModeContext,  } from './ModeContext';
 
@@ -8,34 +8,24 @@ class ModeScreen extends Component {
     render() {
         return (
             <View style={styles.mainContainer}>
-                <ImageBackground source={require('./public/img/welcome.gif')} style={styles.backgroundImage}/>
-                <Text>Get started by selecting the mode of the chat bot!</Text>
-                <Button
-                    title="Friendly Mode"
-                    onPress={() =>
-                        this.props.navigation.navigate('ChooseFriendlyMode')
-                    }
-                    style={styles.button}
-                />
-				<View> 
+                <Image source={require('./public/img/welcome.gif')} style={styles.backgroundImage}/>
+                <Text style={styles.headerText}>Get started by selecting the mode of the chat bot!</Text>
+                <View style={styles.friendlyButton}>
+                    <Button
+                        title="Friendly Mode"
+                        onPress={() =>
+                            this.props.navigation.navigate('ChooseFriendlyMode')
+                        }
+                    />
+                </View>
+				<View style={styles.debateButton}> 
 					<Button
 						title="Critical Mode"
 						onPress={() =>
 							this.props.navigation.navigate('ChooseDebateMode')
 						}
-		   
-						/>
-			 </View>
-				<View style={[{ width: "90%", margin: 10, backgroundColor: "red" }]}>
-          <Button
-            onPress={() =>
-							this.props.navigation.navigate('ChooseDebateMode')
-						}
-            title="Button Three"
-            color="#FF3D00"
-          />
-        </View>
-                
+                    />
+			    </View>
             </View>
         );
     }
@@ -50,15 +40,28 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    button: {
-        margin: 20
+    headerText: {
+        color: "white",
+        fontSize: "30px"
+    },
+    friendlyButton: {
+        width: "65%",
+        height: "10%",
+        backgroundColor: "limegreen"
+    },
+    debateButton: {
+        width: "65%",
+        height: "10%",
+        backgroundColor: "orange"
     },
     backgroundImage: {
-        flex: 1,
         width: '100%',
         height: '100%',
-        justifyContent: "center",
-        alignItems: "center",
+		position: "absolute",
+		top: 0,
+		left:0,
+		bottom:0,
+        right:0,
         opacity: 0.5,
     }
 })

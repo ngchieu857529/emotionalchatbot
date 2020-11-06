@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image, Button, ImageBackground } from 'react-native';
+import { StyleSheet, Text, View, Image, Button } from 'react-native';
 
 import { ModeContext } from './ModeContext';
 
@@ -18,22 +18,24 @@ class ChooseFriendlyModeScreen extends Component {
     render() {
         return (
             <View style={styles.mainContainer}>
-                <ImageBackground source={require('./public/img/welcome.gif')} style={styles.backgroundImage}/>
-                <Text>Choose a mode to continue!</Text>
-                <Button
-                    title="User vs. Bot"
-                    onPress={() =>
-                        this.updateModeFriendlyOne()
-                    }
-                    style={styles.button}
-                />
-                <Button
-                    title="Bot vs. Bot"
-                    onPress={() =>
-                        this.updateModeFriendlyTwo()
-                    }
-                    style={styles.button}
-                />
+                <Image source={require('./public/img/welcome.gif')} style={styles.backgroundImage}/>
+                <Text style={styles.headerText}>Choose a mode to continue!</Text>
+                <View style={styles.userVBotButton}>
+                    <Button
+                        title="User vs. Bot"
+                        onPress={() =>
+                            this.updateModeFriendlyOne()
+                        }
+                    />
+                </View>
+                <View style={styles.botVBotButton}>
+                    <Button
+                        title="Bot vs. Bot"
+                        onPress={() =>
+                            this.updateModeFriendlyTwo()
+                        }
+                    />
+                </View>
             </View>
         );
     }
@@ -48,15 +50,28 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    button: {
-        margin: 20
+    headerText: {
+        color: "white",
+        fontSize: "30px"
+    },
+    userVBotButton: {
+        width: "65%",
+        height: "10%",
+        backgroundColor: "blue"
+    },
+    botVBotButton: {
+        width: "65%",
+        height: "10%",
+        backgroundColor: "green"
     },
     backgroundImage: {
-        flex: 1,
         width: '100%',
         height: '100%',
-        justifyContent: "center",
-        alignItems: "center",
+		position: "absolute",
+		top: 0,
+		left:0,
+		bottom:0,
+        right:0,
         opacity: 0.5,
     }
 })
