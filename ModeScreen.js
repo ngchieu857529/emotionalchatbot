@@ -9,12 +9,11 @@ class ModeScreen extends Component {
         return (
             <View style={styles.mainContainer}>
                 <Image source={require('./public/img/welcome.gif')} style={styles.backgroundImage}/>
-                <Text style={styles.headerText}>Get started by selecting the mode of the chat bot!
-					{"\n"}<Text style = {[{fontSize: 24}]}>Hint:
-				
-				
-				</Text>
-				
+                <Text style={styles.headerText}>
+                    Get started by selecting the mode of the chat bot!{"\n"}
+					<Text style = {[{fontSize: 24}]}>
+                        Hint:
+				    </Text>
 				</Text>
                 <View style={[{ width: "65%", margin: 10}]}>
                     <Button
@@ -57,9 +56,8 @@ const styles = StyleSheet.create({
 		borderColor: 'skyblue',
 		borderWidth: 1,
         textAlign: 'center',
-		
+		borderRadius: 5,
     },
-
     backgroundImage: {
         width: '100%',
         height: '100%',

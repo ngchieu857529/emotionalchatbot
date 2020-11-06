@@ -287,13 +287,13 @@ class ChatScreen extends Component {
             </CustomView> */}
 
             {currentMode == "Default" && (
-            <Image source={require('./public/img/welcome.gif')} style={styles.bg}/>
+            <Image source={require('./public/img/welcome.gif')} style={styles.backgroundImage}/>
             )}
             {(currentMode == "Friendly One" || currentMode == "Friendly Two") && (
-            <Image source={require('./public/img/welcome.gif')} style={styles.bg}/>
+            <Image source={require('./public/img/welcome.gif')} style={styles.backgroundImage}/>
             )}
             {(currentMode == "Debate One" || currentMode == "Debate Two") && (
-            <Image source={require('./public/img/US_Flag.jpg')} style={styles.bg}/>
+            <Image source={require('./public/img/US_Flag.jpg')} style={styles.backgroundImage}/>
             )}
             
             <Button
@@ -352,7 +352,8 @@ const styles = StyleSheet.create({
 		top: 0,
 		left:0,
 		bottom:0,
-		right:0, opacity: 0.5
+        right:0,
+        opacity: 0.5,
     },
 })
 

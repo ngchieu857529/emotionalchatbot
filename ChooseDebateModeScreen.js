@@ -20,20 +20,22 @@ class ChooseDebateModeScreen extends Component {
             <View style={styles.mainContainer}>
                 <Image source={require('./public/img/US_Flag.jpg')} style={styles.backgroundImage}/>
                 <Text style={styles.headerText}>Choose a mode to continue the debate!</Text>
-                <View style={styles.userVBotButton}>
+                <View style={[{ width: "65%", margin: 10}]}>
                     <Button
                         title="User vs. Bot"
                         onPress={() =>
                             this.updateModeDebateOne()
                         }
+                        color="#3C3B6E"
                     />
                 </View>
-				<View style={styles.botVBotButton}>
+				<View style={[{ width: "65%", margin: 10}]}>
                     <Button
                         title="Bot vs. Bot"
                         onPress={() =>
                             this.updateModeDebateTwo()
                         }
+                        color="#B22234"
                     />
                 </View>
             </View>
@@ -52,18 +54,15 @@ const styles = StyleSheet.create({
 		opacity: 1,
     },
     headerText: {
-        color: "white",
-        fontSize: 30
-    },
-    userVBotButton: {
-        width: "65%",
-        height: "10%",
-        backgroundColor: "blue"
-    },
-    botVBotButton: {
-        width: "65%",
-        height: "10%",
-        backgroundColor: "red"
+        color: "skyblue",
+        fontSize: 30,
+		backgroundColor: 'white',
+		marginBottom: 50,
+		borderStyle: "solid",
+		borderColor: 'skyblue',
+		borderWidth: 1,
+        textAlign: 'center',
+		borderRadius: 5,
     },
     backgroundImage: {
         width: '100%',

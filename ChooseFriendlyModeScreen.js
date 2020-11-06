@@ -20,20 +20,22 @@ class ChooseFriendlyModeScreen extends Component {
             <View style={styles.mainContainer}>
                 <Image source={require('./public/img/welcome.gif')} style={styles.backgroundImage}/>
                 <Text style={styles.headerText}>Choose a mode to continue!</Text>
-                <View style={styles.userVBotButton}>
+                <View style={[{ width: "65%", margin: 10}]}>
                     <Button
                         title="User vs. Bot"
                         onPress={() =>
                             this.updateModeFriendlyOne()
                         }
+                        color="#3C3B6E"
                     />
                 </View>
-                <View style={styles.botVBotButton}>
+                <View style={[{ width: "65%", margin: 10}]}>
                     <Button
                         title="Bot vs. Bot"
                         onPress={() =>
                             this.updateModeFriendlyTwo()
                         }
+                        color="green"
                     />
                 </View>
             </View>
@@ -51,18 +53,15 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     headerText: {
-        color: "white",
-        fontSize: 30
-    },
-    userVBotButton: {
-        width: "65%",
-        height: "10%",
-        backgroundColor: "blue"
-    },
-    botVBotButton: {
-        width: "65%",
-        height: "10%",
-        backgroundColor: "green"
+        color: "skyblue",
+        fontSize: 30,
+		backgroundColor: 'white',
+		marginBottom: 50,
+		borderStyle: "solid",
+		borderColor: 'skyblue',
+		borderWidth: 1,
+        textAlign: 'center',
+		borderRadius: 5,
     },
     backgroundImage: {
         width: '100%',
