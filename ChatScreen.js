@@ -1,7 +1,8 @@
 import 'react-native-gesture-handler';
 import React, { Component } from 'react';
 import axios from 'axios';
-import { StyleSheet, Text, View, Image, Button, Keyboard } from 'react-native';
+import KeyboardListener from 'react-native-keyboard-listener';
+import { StyleSheet, Text, View, Image, Button } from 'react-native';
 
 import { GiftedChat } from 'react-native-gifted-chat';
 
@@ -28,28 +29,6 @@ class ChatScreen extends Component {
 
     componentDidMount() {
 
-    }
-
-    componentWillMount () {
-        this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow);
-        this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this._keyboardDidHide);
-    }
-    
-    componentWillUnmount () {
-        this.keyboardDidShowListener.remove();
-        this.keyboardDidHideListener.remove();
-    }
-    
-    _keyboardDidShow () {
-        this.setState({
-            gifPos: -500
-        })
-    }
-    
-    _keyboardDidHide () {
-        this.setState({
-            gifPos: 0
-        })
     }
 
     sendBotResponse(text) {
@@ -115,6 +94,12 @@ class ChatScreen extends Component {
     render() {
         return (
         <View style={styles.mainContainer}>
+            <View>
+                <KeyboardListener
+                    onWillShow={() => { this.setState({ gifPos: 0 }); }}
+                    onWillHide={() => { this.setState({ gifPos: -500 }); }}
+                />
+            </View>
             <CustomView hide={this.state.hideLoading} style={styles.gifView} style={{marginBottom: this.state.gifPos}}>
                 <Image source={require('./public/img/typing.gif')} />
             </CustomView>
@@ -153,7 +138,7 @@ const styles = StyleSheet.create({
     gifView: {
         justifyContent: 'flex-end',
         alignContent: "flex-start",
-        // marginBottom: this.state.gifPos,
+        // marginBottom: -500,
         width: 100,
         height: 100,
     }
