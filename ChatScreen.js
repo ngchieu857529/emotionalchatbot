@@ -115,7 +115,7 @@ class ChatScreen extends Component {
     render() {
         return (
         <View style={styles.mainContainer}>
-            <CustomView hide={this.state.hideLoading} style={styles.gifView}>
+            <CustomView hide={this.state.hideLoading} style={styles.gifView} style={{marginBottom: this.state.gifPos}}>
                 <Image source={require('./public/img/typing.gif')} />
             </CustomView>
             <GiftedChat
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
     gifView: {
         justifyContent: 'flex-end',
         alignContent: "flex-start",
-        marginBottom: this.state.gifPos,
+        // marginBottom: this.state.gifPos,
         width: 100,
         height: 100,
     }
