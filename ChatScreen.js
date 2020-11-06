@@ -21,7 +21,7 @@ class ChatScreen extends Component {
             currentImageTwoIndex: 0,
             canSendMessage: true,
             friendlyDomain: "1df454a3372e",
-            debateDomain: "e77965f8135d",
+            debateDomain: "77d300b4173e",
         };
     }
 
@@ -52,6 +52,8 @@ class ChatScreen extends Component {
                 }
             ],
         });
+		
+		
     }
 
     changeBotProfile() {
@@ -163,7 +165,8 @@ class ChatScreen extends Component {
         const currentMode = this.context.currentMode;
         const friendlyDomain = this.state.friendlyDomain;
         const debateDomain = this.state.debateDomain;
-
+		// console.log(this.state.currentImageIndex)
+		// console.log(this.state.currentImageTwoIndex)
         if (canSendMessage == false) {
             alert('Conversation Happening! Cannot send message.')
             return
@@ -189,10 +192,15 @@ class ChatScreen extends Component {
             Keyboard.dismiss()
         } else if (currentMode == "Debate One") {
             url = "http://" + debateDomain + ".ngrok.io/api/v1/chat?msg=" + message
+			console.log(url)
         } else { //currentMode == "Debate Two"
-            url = "http://" + debateDomain + ".ngrok.io/api/v1/autochat?topic=" + message + "&model1=" + botProfiles[this.state.currentImageIndex][1] + "&model2=" + botProfiles[this.state.currentImageIndexTwo][1]
-            Keyboard.dismiss()
+            url = "http://" + debateDomain + ".ngrok.io/api/v1/autochat?topic=" + message + "&model1=" + botProfiles[this.state.currentImageIndex][1] 
+																						+ "&model2=" + botProfiles[this.state.currentImageTwoIndex][1]
+            
+			Keyboard.dismiss()
+			
         }
+		
 
         axios.get(url)
             .then(response => {
@@ -222,6 +230,7 @@ class ChatScreen extends Component {
         } else if (currentMode == "Debate One") {
             this.initialBotRender();
             axios.get("http://" + debateDomain + ".ngrok.io/api/v1/reset?model=" + botProfiles[this.state.currentImageIndex][1])
+			console.log("http://" + debateDomain + ".ngrok.io/api/v1/reset?model=" + botProfiles[this.state.currentImageIndex][1])
         }    
     }
 
