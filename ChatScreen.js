@@ -2,7 +2,7 @@ import 'react-native-gesture-handler';
 import React, { Component } from 'react';
 import axios from 'axios';
 import KeyboardListener from 'react-native-keyboard-listener';
-import { StyleSheet, Text, View, ImageBackground, Button } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground, Button, Keyboard } from 'react-native';
 
 import { GiftedChat } from 'react-native-gifted-chat';
 
@@ -13,18 +13,7 @@ class ChatScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            messages: [
-            {
-                _id: 1,
-                text: `Hello! I am here to assist you and make your day better. \n\nHow are you doing?`,
-                createdAt: new Date(),
-                user: {
-                    _id: 2,
-                    name: 'null',
-                    avatar: ''
-                }
-            }
-            ],
+            messages: [],
             returnedData: null,
             hideLoading: true,
             gifPos: -10,
@@ -36,19 +25,29 @@ class ChatScreen extends Component {
 
     componentDidMount() {
         this.changeBotAvatar();
-		
+        this.returnBotAvatar();
     }
 
     changeBotAvatar() {
         const randomNumber = Math.floor(Math.random() * avatars.length);
         this.setState({
-            currentImageIndex: randomNumber
+            currentImageIndex: randomNumber,
+            messages: [
+                {
+                    _id: 1,
+                    text: `Hello! I am here to assist you and make your day better. \n\nHow are you doing?`,
+                    createdAt: new Date(),
+                    user: {
+                        _id: 2,
+                        name: 'null',
+                        avatar: avatars[randomNumber][2]
+                    }
+                }
+            ],
         });
-		this.returnBotAvatar()
     }
 
     returnBotAvatar() {
-		console.log(avatars[this.state.currentImageIndex][2])
         return (avatars[this.state.currentImageIndex][2]);
     }
 
@@ -68,7 +67,6 @@ class ChatScreen extends Component {
             avatar: 'https://placeimg.com/140/140/any'
         }
         };
-		console.log(this.returnBotAvatar())
         
         setTimeout(function(){
             self.setState(previousState => ({
@@ -107,9 +105,8 @@ class ChatScreen extends Component {
                     avatar: this.returnBotAvatar()
                 }
             };
-			console.log(text1 + text2)
+
             //setTimeout(function(){
-				console.log(i)
                 self.setState(previousState => ({
                 messages: GiftedChat.append(previousState.messages, [msg1])
                 }));
@@ -119,7 +116,7 @@ class ChatScreen extends Component {
                 });
             //}, 3000)
             //setTimeout(function(){
-				console.log(i)
+
                 self.setState(previousState => ({
                 messages: GiftedChat.append(previousState.messages, [msg2])
                 }));
@@ -160,10 +157,12 @@ class ChatScreen extends Component {
             url = "http://" + friendlyDomain + ".ngrok.io/api/v1/chat?msg=" + message
         } else if (currentMode == "Friendly Two") {
             url = "http://" + friendlyDomain + ".ngrok.io/api/v1/autochat?topic=" + message
+            Keyboard.dismiss()
         } else if (currentMode == "Debate One") {
             url = "http://" + debateDomain + ".ngrok.io/api/v1/chat?msg=" + message
         } else { //currentMode == "Debate Two"
             url = "http://" + debateDomain + ".ngrok.io/api/v1/autochat?topic=" + message
+            Keyboard.dismiss()
         }
 
         axios.get(url)
@@ -232,19 +231,14 @@ ChatScreen.contextType = ModeContext;
 
 const avatars = [
 	['John', 'Republican', 'https://github.com/ngchieu857529/emotionalchatbot/blob/chat_bot_v1/public/img/avatar1.JPG?raw=true'],
-	['Andrew', 'Democrat', './public/img/avatar2.jpg'],
+    ['Andrew', 'Democrat', 'https://github.com/ngchieu857529/emotionalchatbot/blob/chat_bot_v1/public/img/avatar2.JPG?raw=true'],
+    ['David', 'Republican', 'https://github.com/ngchieu857529/emotionalchatbot/blob/chat_bot_v1/public/img/avatar3.JPG?raw=true'],
+    ['Matthew', 'Democrat', 'https://github.com/ngchieu857529/emotionalchatbot/blob/chat_bot_v1/public/img/avatar4.JPG?raw=true'],
+    ['Sarah', 'Republican', 'https://github.com/ngchieu857529/emotionalchatbot/blob/chat_bot_v1/public/img/avatar5.JPG?raw=true'],
+    ['Jane', 'Democrat', 'https://github.com/ngchieu857529/emotionalchatbot/blob/chat_bot_v1/public/img/avatar6.JPG?raw=true'],
+    ['Rose', 'Republican', 'https://github.com/ngchieu857529/emotionalchatbot/blob/chat_bot_v1/public/img/avatar7.JPG?raw=true'],
+    ['Adi', 'Democrat', 'https://github.com/ngchieu857529/emotionalchatbot/blob/chat_bot_v1/public/img/avatar8.JPG?raw=true'],
 ]
-
-/*
-    './public/img/avatar1.jpg',
-    './public/img/avatar2.jpg',
-    './public/img/avatar3.jpg',
-    './public/img/avatar4.jpg',
-    './public/img/avatar5.jpg',
-    './public/img/avatar6.jpg',
-    './public/img/avatar7.jpg',
-    './public/img/avatar8.jpg',
-];*/
 
 const botNames = [
     'A',
