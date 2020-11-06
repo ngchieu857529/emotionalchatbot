@@ -29,7 +29,7 @@ class ChatScreen extends Component {
             hideLoading: true,
             gifPos: -10,
             currentImageIndex: 0,
-            canSendMessage = true,
+            canSendMessage: true,
         };
     }
 
@@ -45,11 +45,11 @@ class ChatScreen extends Component {
     }
 
     returnBotAvatar() {
-        return (avatars[this.state.currentImageIndex]);
+        return (avatars[0]);
     }
 
     returnBotName() {
-        return (botNames[this.state.currentImageIndex]);
+        return (botNames[0])
     }
 
     sendBotResponse(text) {
@@ -71,18 +71,20 @@ class ChatScreen extends Component {
             }));
             self.setState({
                 hideLoading: true,
+				canSendMessage: true
             });
         }, 3000)
     }
 
     handleBotVsBotMode(response) {
         var self = this;
-        for (var i = 0; i < response.length; i+=2) {
-            const text1 = response[i];
-            const text2 = response[i+1];
+        for (var i = 0; i < response[0].length; i+=2) {
+			
+            const text1 = response[0][i];
+            const text2 = response[0][i+1];
             let msg1 = {
-                _id: text1.length + 1,
-                text1,
+                _id: i+3,
+                text: text1,
                 createdAt: new Date(),
                 user: {
                     _id: 2,
@@ -91,17 +93,18 @@ class ChatScreen extends Component {
                 }
             };
             let msg2 = {
-                _id: text2.length + 1,
-                text2,
+                _id: i+4,
+                text: text2,
                 createdAt: new Date(),
                 user: {
-                    _id: 3,
+                    _id: 1,
                     name: this.returnBotName(),
                     avatar: this.returnBotAvatar()
                 }
             };
-
-            setTimeout(function(){
+			console.log(text1 + text2)
+            //setTimeout(function(){
+				console.log(i)
                 self.setState(previousState => ({
                 messages: GiftedChat.append(previousState.messages, [msg1])
                 }));
@@ -109,8 +112,9 @@ class ChatScreen extends Component {
                     hideLoading: true,
                     canSendMessage: true,
                 });
-            }, 3000)
-            setTimeout(function(){
+            //}, 3000)
+            //setTimeout(function(){
+				console.log(i)
                 self.setState(previousState => ({
                 messages: GiftedChat.append(previousState.messages, [msg2])
                 }));
@@ -118,7 +122,7 @@ class ChatScreen extends Component {
                     hideLoading: true,
                     canSendMessage: true,
                 });
-            }, 3000)
+            //}, 3000)
         }
     }
 
@@ -126,7 +130,7 @@ class ChatScreen extends Component {
         var self = this;
         const canSendMessage = this.state.canSendMessage;
         const currentMode = this.context.currentMode;
-        const friendlyDomain = "816f892908aa";
+        const friendlyDomain = "1df454a3372e";
         const debateDomain = "816f892908aa";
 
         if (canSendMessage == false) {
@@ -163,9 +167,10 @@ class ChatScreen extends Component {
                 self.setState({
                     returnedData: response.data
                 });
-                if (currentMode == "Friendly One" || currentMode == "Friendly Two") {
+				
+                if (currentMode == "Friendly One" || currentMode == "Debate One") {
                     self.sendBotResponse(response.data);
-                } else { //Debate Mode
+                } else { //BotvsBot Mode
                     self.handleBotVsBotMode(response.data);
                 }
             })
@@ -198,7 +203,7 @@ class ChatScreen extends Component {
             <CustomView hide={this.state.hideLoading}>
                 <ImageBackground source={require('./public/img/typing.gif')} style={{width: 50, height: 50, justifyContent: 'center', alignContent: 'center',}}/>
             </CustomView> */}
-            <ImageBackground source={require(backgroundImageUrl)} style={{width: '100%', height: '100%'}}/>
+            <ImageBackground source={require('./public/img/welcome.gif')} style={{width: '50%', height: '50%'}}/>
             <GiftedChat
             messages={this.state.messages}
             onSend={messages => this.onSend(messages)}
