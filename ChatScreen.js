@@ -2,7 +2,7 @@ import 'react-native-gesture-handler';
 import React, { Component } from 'react';
 import axios from 'axios';
 import KeyboardListener from 'react-native-keyboard-listener';
-import { StyleSheet, Text, View, Image, Button } from 'react-native';
+import { StyleSheet, Text, View, ImageBackground, Button } from 'react-native';
 
 import { GiftedChat } from 'react-native-gifted-chat';
 
@@ -23,7 +23,7 @@ class ChatScreen extends Component {
             ],
             returnedData: null,
             hideLoading: true,
-            gifPos: -500,
+            gifPos: -10,
         };
     }
 
@@ -53,8 +53,8 @@ class ChatScreen extends Component {
     onSend(messages = []) {
         var self = this;
         const currentMode = this.context.currentMode;
-        const friendlyDomain = "3c7320a8064f";
-        const debateDomain = "3c7320a8064f";
+        const friendlyDomain = "816f892908aa";
+        const debateDomain = "816f892908aa";
 
         this.setState(previousState => ({
         messages: GiftedChat.append(previousState.messages, messages)
@@ -96,12 +96,13 @@ class ChatScreen extends Component {
         <View style={styles.mainContainer}>
             <View>
                 <KeyboardListener
-                    onWillShow={() => { this.setState({ gifPos: 0 }); }}
-                    onWillHide={() => { this.setState({ gifPos: -500 }); }}
+                    onDidShow={() => { this.setState({ gifPos: -500 }); }}
+                    onDidHide={() => { this.setState({ gifPos: -500 }); }}
                 />
             </View>
-            <CustomView hide={this.state.hideLoading} style={styles.gifView} style={{marginBottom: this.state.gifPos}}>
-                <Image source={require('./public/img/typing.gif')} />
+			{console.log(this.state.gifPos)}
+            <CustomView hide={this.state.hideLoading}>
+                <ImageBackground source={require('./public/img/typing.gif')} style={{width: 50, height: 50, justifyContent: 'center', alignContent: 'center',}}/>
             </CustomView>
             <GiftedChat
             messages={this.state.messages}
