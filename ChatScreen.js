@@ -20,8 +20,8 @@ class ChatScreen extends Component {
                 createdAt: new Date(),
                 user: {
                     _id: 2,
-                    name: this.returnBotName(),
-                    avatar: this.returnBotAvatar()
+                    name: 'null',
+                    avatar: ''
                 }
             }
             ],
@@ -30,11 +30,13 @@ class ChatScreen extends Component {
             gifPos: -10,
             currentImageIndex: 0,
             canSendMessage: true,
+			
         };
     }
 
     componentDidMount() {
         this.changeBotAvatar();
+		
     }
 
     changeBotAvatar() {
@@ -42,10 +44,12 @@ class ChatScreen extends Component {
         this.setState({
             currentImageIndex: randomNumber
         });
+		this.returnBotAvatar()
     }
 
     returnBotAvatar() {
-        return (avatars[0]);
+		console.log(avatars[this.state.currentImageIndex][2])
+        return (avatars[this.state.currentImageIndex][2]);
     }
 
     returnBotName() {
@@ -61,9 +65,10 @@ class ChatScreen extends Component {
         user: {
             _id: 2,
             name: this.returnBotName(),
-            avatar: this.returnBotAvatar()
+            avatar: 'https://placeimg.com/140/140/any'
         }
         };
+		console.log(this.returnBotAvatar())
         
         setTimeout(function(){
             self.setState(previousState => ({
@@ -225,11 +230,10 @@ class ChatScreen extends Component {
 
 ChatScreen.contextType = ModeContext;
 
-const avatars ={
-	'./public/img/avatar1.jpg': ['John', 'Republican'],
-	'./public/img/avatar2.jpg': ['Andrew', 'Democrat'],
-}
-console.log(avatars['./public/img/avatar1.jpg'][0] + ' ' + avatars['./public/img/avatar1.jpg'][1])
+const avatars = [
+	['John', 'Republican', 'https://github.com/ngchieu857529/emotionalchatbot/blob/chat_bot_v1/public/img/avatar1.JPG?raw=true'],
+	['Andrew', 'Democrat', './public/img/avatar2.jpg'],
+]
 
 /*
     './public/img/avatar1.jpg',
