@@ -29,18 +29,18 @@ class ChatScreen extends Component {
     }
 
     changeBotAvatar() {
-        const randomNumber = Math.floor(Math.random() * avatars.length);
+        const randomNumber = Math.floor(Math.random() * botProfiles.length);
         this.setState({
             currentImageIndex: randomNumber,
             messages: [
                 {
                     _id: 1,
-                    text: `Hello! I am here to assist you and make your day better. \n\nHow are you doing?`,
+                    text: `Hello, my name is ` + botProfiles[randomNumber][0] + `. I am a SoulFull assistant!\n\nI am here to assist you and make your day better. How are you doing?`,
                     createdAt: new Date(),
                     user: {
                         _id: 2,
                         name: 'null',
-                        avatar: avatars[randomNumber][2]
+                        avatar: botProfiles[randomNumber][2]
                     }
                 }
             ],
@@ -48,7 +48,7 @@ class ChatScreen extends Component {
     }
 
     returnBotAvatar() {
-        return (avatars[this.state.currentImageIndex][2]);
+        return (botProfiles[this.state.currentImageIndex][2]);
     }
 
     returnBotName() {
@@ -64,7 +64,7 @@ class ChatScreen extends Component {
         user: {
             _id: 2,
             name: this.returnBotName(),
-            avatar: 'https://placeimg.com/140/140/any'
+            avatar: this.returnBotAvatar()
         }
         };
         
@@ -229,7 +229,7 @@ class ChatScreen extends Component {
 
 ChatScreen.contextType = ModeContext;
 
-const avatars = [
+const botProfiles = [
 	['John', 'Republican', 'https://github.com/ngchieu857529/emotionalchatbot/blob/chat_bot_v1/public/img/avatar1.JPG?raw=true'],
     ['Andrew', 'Democrat', 'https://github.com/ngchieu857529/emotionalchatbot/blob/chat_bot_v1/public/img/avatar2.JPG?raw=true'],
     ['David', 'Republican', 'https://github.com/ngchieu857529/emotionalchatbot/blob/chat_bot_v1/public/img/avatar3.JPG?raw=true'],
@@ -238,17 +238,6 @@ const avatars = [
     ['Jane', 'Democrat', 'https://github.com/ngchieu857529/emotionalchatbot/blob/chat_bot_v1/public/img/avatar6.JPG?raw=true'],
     ['Rose', 'Republican', 'https://github.com/ngchieu857529/emotionalchatbot/blob/chat_bot_v1/public/img/avatar7.JPG?raw=true'],
     ['Adi', 'Democrat', 'https://github.com/ngchieu857529/emotionalchatbot/blob/chat_bot_v1/public/img/avatar8.JPG?raw=true'],
-]
-
-const botNames = [
-    'A',
-    'B',
-    'C',
-    'D',
-    'E',
-    'F',
-    'G',
-    'H',
 ]
 
 const styles = StyleSheet.create({
