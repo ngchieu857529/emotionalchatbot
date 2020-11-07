@@ -42,9 +42,9 @@ class ChatScreen extends Component {
 
         var welcomeMessage = "";
         if (currentMode == "Friendly One" || currentMode == "Debate One") {
-            welcomeMessage = 'Hello, my name is ' + botProfiles[randomNumber][0] + '. I am a Soul-ful assistant!\n\nI am here to assist you and make your day better. How are you doing?'
+            welcomeMessage = 'Hello, my name is ' + botProfiles[randomNumber][0] + '. I am a Soulful.AI assistant!\n\nI am here to assist you and make your day better. How are you doing?'
         } else { //Bot vs Bot mode
-            welcomeMessage = 'Hello, we are ' + botProfiles[randomNumber][0] + ' and ' + botProfiles[randomNumberTwo][0] + '. We are Soul-ful assistants!\n\nEnter a topic for us to discuss!'
+            welcomeMessage = 'Hello, we are ' + botProfiles[randomNumber][0] + ' and ' + botProfiles[randomNumberTwo][0] + '. We are Soulful.AI assistants!\n\nEnter a topic for us to discuss!'
         }
 
         this.setState({
@@ -244,6 +244,7 @@ class ChatScreen extends Component {
             })
             .catch(error => {
                 console.log(error);
+                alert("Something went wrong when retrieving data from the server. Please try again!")
             });
     }
 
@@ -308,7 +309,7 @@ class ChatScreen extends Component {
             placeholder={"Type a message"}
             timeFormat={'h:mm A'}
             dateFormat={'DD MMM YYYY'}
-            loadEarlier={true}
+            loadEarlier={false}
             scrollToBottom={true}
             infiniteScroll={true}
             user={{

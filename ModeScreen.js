@@ -56,7 +56,8 @@ const styles = StyleSheet.create({
 		borderColor: 'skyblue',
 		borderWidth: 1,
         textAlign: 'center',
-		borderRadius: 5,
+        borderRadius: 5,
+        padding: 5,
     },
     backgroundImage: {
         width: '100%',
