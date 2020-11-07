@@ -45,6 +45,27 @@ Bot vs Bot (automatic):
 Two separate models (trained with different perspectives) will have a short conversation with each other. Roles may vary.
 For example, model 1 can be Republican supporter while model 2 can be a Democratic supporter.
 
+Implementation:
+An ensemble of models was built on Google Colaboratory, consisting of 4-5 different models suitable for different knowledge domains.
+The NLP framework is HuggingFace, the leading open-source framework for NLP solutions using Transformers built on top of PyTorch.
+The mobile application was built on Android via the React Native framework, one of the most popular choices for developing robust cross-platform applications using JavaScript.  The multiplatform-compatible framework was developed by Facebook for ease of building native applications.
+
+
+Future Scope:
+
+Human in the loop: Real-time feedback
+Multiple simultaneous messages from each side.
+More knowledge domains
+UI improvement
+Model deployment on the Cloud (Amazon AWS, Microsoft Azure, …)
+Application Deployment in Google Playstore
+Multi-modality Analysis:
+Natural Language Processing
+Object Detection (to interpret user’s uploaded images)
+User Sentiment Analysis
+Diverse text-to-speech models (gender-based, age-sensitive, and more natural-sounding)
+Speech-to-text features (to simulate phone calls or Facetiming)
+
 References:
 https://reactnative.dev/
 https://github.com/microsoft/DialoGPT
@@ -55,4 +76,3 @@ https://www.reddit.com/r/Coronavirus/
 https://pytorch.org/
 
 
-P
