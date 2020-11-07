@@ -23,14 +23,30 @@ class ChatScreen extends Component {
             canSendMessage: true,
             hideLoading: true,
             botHasReset: true,
-            friendlyDomain: "http://5b8403d43fb7.ngrok.io", //To be changed everytime the server is reset
-            debateDomain: "http://19ffe4d818ac.ngrok.io", //To be changed everytime the server is reset
+            msgIndex: 0,
+            topic: "",
+            messageArr: [],
+            friendlyDomain: "http://701ae33667f2.ngrok.io", //To be changed everytime the server is reset
+            debateDomain: "http://da9791c10e26.ngrok.io", //To be changed everytime the server is reset
         };
     }
 
     componentDidMount() {
+        var self = this;
+
         this.initialBotRender();
-		Tts.setDefaultRate(0.55);
+        Tts.setDefaultRate(0.55);
+        Tts.addEventListener('tts-finish', (event) => self.handleFinishTalking())
+    }
+
+    handleFinishTalking() {
+        var self = this;
+
+        self.setState({
+            msgIndex: self.state.msgIndex + 1
+        })
+
+        self.displayMessage(self.state.messageArr, self.state.msgIndex);
     }
 
     getRandomNumber () {
@@ -47,7 +63,12 @@ class ChatScreen extends Component {
 
         var welcomeMessage = "";
         if (currentMode == "Friendly One" || currentMode == "Debate One") {
-            welcomeMessage = 'Hello, my name is ' + botProfiles[randomNumber][0] + '. I am a Soulful.AI assistant!\n\nI am here to assist you and make your day better. How are you doing?'
+            if (currentMode == "Debate One"){
+                welcomeMessage = 'Hello, my name is ' + botProfiles[randomNumber][0] + '. I am a Soulful.AI assistant!\n\nI am here to have a little discussion with you. My knowledge domain is Politics! What would you like to talk about?'
+            }
+            else {
+                 welcomeMessage = 'Hello, my name is ' + botProfiles[randomNumber][0] + '. I am a Soulful.AI assistant!\n\nI am here to assist you and make your day better. My knowledge domain is COVID-19 Situation. How are you doing?'
+            }
         } else { //Bot vs Bot mode
             welcomeMessage = 'Hello, we are ' + botProfiles[randomNumber][0] + ' and ' + botProfiles[randomNumberTwo][0] + '. We are Soulful.AI assistants!\n\nEnter a topic for us to discuss!'
         }
@@ -67,6 +88,15 @@ class ChatScreen extends Component {
                     }
                 }
             ],
+            returnedData: null,
+            count: 1500,
+            count2: 3000,
+            canSendMessage: true,
+            hideLoading: true,
+            botHasReset: true,
+            msgIndex: 0,
+            topic: "",
+            messageArr: [],
         });
 		
 		
@@ -136,7 +166,8 @@ class ChatScreen extends Component {
 
     handleBotVsBotMode(response) {
         var self = this;
-        var messageList = [];
+        var messageList = self.state.messageArr;
+
         for (var i = 0; i < response[0].length; i+=2) {
             const text1 = response[0][i];
             const text2 = response[0][i+1];
@@ -165,69 +196,85 @@ class ChatScreen extends Component {
             messageList.push(msg1)
             messageList.push(msg2)
         }
-        
-        messageList.map(function(message, index) {
-            self.displayMessage(message);
-
-            // if (messageList[index+1] != null) {
-            //     if (count == 0) {
-            //         self.displayIsTypingMessage(self.state.count2, self.state.currentImageTwoIndex, 1, self.returnBotTwoName(), self.returnBotTwoAvatar())
-            //         count++
-            //     } else { //count = 1
-            //         self.displayIsTypingMessage(self.state.count, self.state.currentImageIndex, 2, self.returnBotName(), self.returnBotAvatar())
-            //         count--
-            //     }
-            // }
+        self.setState({
+            messageArr: messageList
         })
-        this.setState({
-            canSendMessage: true,
-            hideLoading: true,
-            botHasReset: false,
-        });
 
-        let endingMsg = {
-            _id: 1000,
-            text: 'This is the end of our conversation. Please click the "Start New Conversation" button above to reset the chat!',
-            createdAt: new Date(),
-            user: {
-                _id: 2,
-                name: this.returnBotName(),
-                avatar: this.returnBotAvatar()
-            }
-        };
-        this.setState(previousState => ({
-            messages: GiftedChat.append(previousState.messages, [endingMsg])
-        }));
-        Tts.speak(endingMsg.text);
+        self.displayMessage(messageList, self.state.msgIndex);
+     
+        // messageList.map(function(message, index) {
+        //     self.displayMessage(message);
+
+        //     if (messageList[index+1] != null) {
+        //         if (count == 0) {
+        //             self.displayIsTypingMessage(self.state.count2, self.state.currentImageTwoIndex, 1, self.returnBotTwoName(), self.returnBotTwoAvatar())
+        //             count++
+        //         } else { //count = 1
+        //             self.displayIsTypingMessage(self.state.count, self.state.currentImageIndex, 2, self.returnBotName(), self.returnBotAvatar())
+        //             count--
+        //         }
+        //     }
+        // })
     }
-	
-	displayMessage(message, count) {
+
+	displayMessage(messageList, index) {
         var self = this
-		setTimeout(function(){
-            // if (count == 0) {
-            //     self.setState(previousState => ({
-            //         messages: previousState.messages.filter(message => message.id !== self.state.count)
-            //     }));
-            //     console.log('deleting' + self.state.count)
-            //     self.setState({
-            //         count: self.state.count++,
-            //     })
-            // } else { //count = 1
-            //     self.setState(previousState => ({
-            //         messages: previousState.messages.filter(message => message.id !== self.state.count2)
-            //     }));
-            //     console.log('deleting' + self.state.count2)
+        if (index > messageList.length) {
+            return
+        }
+        if (index == messageList.length) {
+            this.setState({
+                canSendMessage: true,
+                hideLoading: true,
+                botHasReset: false,
+            });
+    
+            let endingMsg = {
+                _id: 1000,
+                text: 'This is the end of our conversation. Please click the "Start New Conversation" button above to reset the chat!',
+                createdAt: new Date(),
+                user: {
+                    _id: 2,
+                    name: this.returnBotName(),
+                    avatar: this.returnBotAvatar()
+                }
+            };
+            this.setState(previousState => ({
+                messages: GiftedChat.append(previousState.messages, [endingMsg])
+            }));
+            Tts.speak(endingMsg.text);
+        } else {
+            self.setState(previousState => ({
+                messages: GiftedChat.append(previousState.messages, [messageList[index]])
+            }));
+            Tts.speak(messageList[index].text);
+        }
 
-            //     self.setState({
-            //         count2:self.state.count2++
-            //     })
-            // }
+		// setTimeout(function(){
+        //     if (count == 0) {
+        //         self.setState(previousState => ({
+        //             messages: previousState.messages.filter(message => message.id !== self.state.count)
+        //         }));
+        //         console.log('deleting' + self.state.count)
+        //         self.setState({
+        //             count: self.state.count++,
+        //         })
+        //     } else { //count = 1
+        //         self.setState(previousState => ({
+        //             messages: previousState.messages.filter(message => message.id !== self.state.count2)
+        //         }));
+        //         console.log('deleting' + self.state.count2)
 
-			self.setState(previousState => ({
-				messages: GiftedChat.append(previousState.messages, [message])
-			}));
-            Tts.speak(message.text);
-		}, 3000)
+        //         self.setState({
+        //             count2:self.state.count2++
+        //         })
+        //     }
+
+		// 	self.setState(previousState => ({
+		// 		messages: GiftedChat.append(previousState.messages, [message])
+		// 	}));
+        //     Tts.speak(message.text);
+		// }, 3000)
     }
     
     // displayIsTypingMessage(msg_id, index, user_id, returnNameFunc, returnAvatarFunc) {
@@ -273,6 +320,7 @@ class ChatScreen extends Component {
         this.setState({
             canSendMessage: false,
             hideLoading: false,
+            topic: messages[0].text,
         });
 
         let message = messages[0].text;
@@ -324,10 +372,9 @@ class ChatScreen extends Component {
             axios.get(debateDomain + "/api/v1/reset?model=" + botProfiles[this.state.currentImageIndex][1]);
         } else if (currentMode == "Friendly Two") {
             this.initialBotRender();
-            axios.get(friendlyDomain + "/api/v1/reset");
         } else if (currentMode == "Debate Two") {
             this.initialBotRender();
-            axios.get(debateDomain + "/api/v1/reset?model=" + botProfiles[this.state.currentImageIndex][1]); //TODO: Fix Link
+            axios.get(debateDomain + "/api/v1/reset?model1=" + botProfiles[this.state.currentImageIndex][1] + "&model2=" + botProfiles[this.state.currentImageTwoIndex][1]);
         }
 
         this.setState({
@@ -336,12 +383,14 @@ class ChatScreen extends Component {
     }
 
     onRateConversation() {
-        alert("This is future enhancement to rate this conversation!")
+        alert("Enjoy too much fun so far? Or was the conversation a little off? Don't worry! Stay tuned for next model updates and user feedback features! See you soon!")
     }
 
     render() {
         const currentMode = this.context.currentMode;
         const hideLoading = this.state.hideLoading;
+
+        const topic = this.state.topic;
 
         return (
         <View style={styles.mainContainer}>
@@ -358,23 +407,31 @@ class ChatScreen extends Component {
             {(currentMode == "Debate One" || currentMode == "Debate Two") && (
             <Image source={require('./public/img/US_Flag.jpg')} style={styles.backgroundImage}/>
             )}
-            
-            <View style={[{alignItems: "center"}]}>
-                <View style={[{ width: "65%", marginTop: 10 }]}>
-                    <Button
-                        onPress={() => this.onResetChat(currentMode)}
-                        title="Start New Conversation"	
-                    />
-                </View>
-            </View>
-            <View style={[{alignItems: "flex-end"}]}>
-                <View style={[{ width: "50%", margin: 10 }]}>
+
+            <View style={[{flex: 0.48, flexWrap: 'wrap', flexDirection: 'row', margin: 5, alignItems: "center"}]}>
+                <View style={[{ width: "50%", marginTop: 10 }]}>
                     <Button
                         onPress={() => this.onRateConversation()}
                         title="Rate This Conversation"
                         color="green"	
                     />
                 </View>
+                <View style={[{ width: "50%", marginTop: 10 }]}>
+                    <Button
+                        onPress={() => this.onResetChat(currentMode)}
+                        title="Start New Conversation"
+                    />
+                </View>
+                {(currentMode == "Friendly Two" || currentMode == "Debate Two") && (
+                <View style={[{ width: "100%", marginTop: 10, backgroundColor: "white" }]}>
+                    <Text style={[{textAlign: "center"}]}>
+                        Topic:&nbsp;
+                        <Text style={[{fontSize: 20}]}>
+                            {topic}
+                        </Text>
+                    </Text>
+                </View>
+                )}
             </View>
 
             <GiftedChat

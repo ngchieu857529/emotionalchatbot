@@ -10,8 +10,8 @@ class ModeScreen extends Component {
             <View style={styles.mainContainer}>
                 <Image source={require('./public/img/welcome.gif')} style={styles.backgroundImage}/>
                 <Text style={styles.headerText}>
-                    Welcome to <Text style = {[{ color: "#00FFFF", fontSize: 35}]}>Soulful</Text><Text style = {[{ color: "black", fontSize: 35}]}>.AI</Text>! {"\n"} Get started by selecting the most suitable mode for you at the moment!{"\n\n"}
-					<Text style = {[{ fontSize: 22 }]}>
+                    Welcome to <Text style = {[{ color: "#00FFFF", fontSize: 28}]}>Soulful</Text><Text style = {[{ color: "black", fontSize: 28}]}>.AI</Text>! {"\n"} Get started by selecting the most suitable mode for you at the moment!{"\n"}
+					<Text style = {[{ fontSize: 15 }]}>
                         Choose <Text style = {[{ color: "limegreen" }]}>Friendly Mode</Text> to have a little getaway from all the stress with one of our intimate agents.
                         {"\n\n"}
                         Choose <Text style = {[{ color: "orange" }]}>Critical Mode</Text> to meet a more critical representative and immerse yourself into the arguments!{"\n"}You have been warned.
@@ -54,7 +54,8 @@ const styles = StyleSheet.create({
         color: "skyblue",
         fontSize: 30,
 		backgroundColor: 'white',
-		marginBottom: 50,
+        marginBottom: 10,
+        marginTop:110,
 		borderStyle: "solid",
 		borderColor: 'skyblue',
 		borderWidth: 1,
