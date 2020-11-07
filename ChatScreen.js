@@ -21,6 +21,7 @@ class ChatScreen extends Component {
             count: 1500,
             count2: 3000,
             canSendMessage: true,
+            hideLoading: true,
             botHasReset: true,
             friendlyDomain: "http://5b8403d43fb7.ngrok.io", //To be changed everytime the server is reset
             debateDomain: "http://19ffe4d818ac.ngrok.io", //To be changed everytime the server is reset
@@ -125,6 +126,7 @@ class ChatScreen extends Component {
             Tts.speak(text);
             self.setState({
                 canSendMessage: true,
+                hideLoading: true,
                 count: self.state.count+1
             });
             console.log(self.state.messages[1].text)
@@ -185,6 +187,7 @@ class ChatScreen extends Component {
         })
         this.setState({
             canSendMessage: true,
+            hideLoading: true,
             botHasReset: false,
         });
 
@@ -277,6 +280,7 @@ class ChatScreen extends Component {
 		
         this.setState({
             canSendMessage: false,
+            hideLoading: false,
         });
 
         let message = messages[0].text;
@@ -345,9 +349,13 @@ class ChatScreen extends Component {
 
     render() {
         const currentMode = this.context.currentMode;
+        const hideLoading = this.state.hideLoading;
 
         return (
         <View style={styles.mainContainer}>
+            {hideLoading == false && (
+                <Image source={require('./public/img/typing.gif')} style={styles.gifImage}/>
+            )}
 
             {currentMode == "Default" && (
             <Image source={require('./public/img/welcome.gif')} style={styles.backgroundImage}/>
@@ -419,9 +427,19 @@ const styles = StyleSheet.create({
         height: "100%",
 		position: "absolute",
 		top: 0,
-		left:0,
-		bottom:0,
-        right:0,
+		left: 0,
+		bottom: 0,
+        right: 0,
+        opacity: 0.5,
+    },
+    gifImage: {
+        width: "50%",
+        height: "50%",
+		position: "absolute",
+		top: 100,
+		left: 0,
+		bottom: 100,
+        right: 0,
         opacity: 0.5,
     },
 })
