@@ -7,19 +7,19 @@ import { ModeContext } from './ModeContext';
 class ChooseFriendlyModeScreen extends Component {
     updateModeFriendlyOne() {
         this.context.updateMode("Friendly One");
-        this.props.navigation.navigate('Chat')
+        this.props.navigation.navigate('Chat Screen')
     }
 
     updateModeFriendlyTwo() {
         this.context.updateMode("Friendly Two");
-        this.props.navigation.navigate('Chat')
+        this.props.navigation.navigate('Chat Screen')
     }
 
     render() {
         return (
             <View style={styles.mainContainer}>
-                <Image source={require('./public/img/welcome.gif')} style={styles.backgroundImage}/>
-                <Text style={styles.headerText}>Choose a mode to continue!</Text>
+                <Image source={require('./public/img/friendly.jpg')} style={styles.backgroundImage}/>
+                <Text style={styles.headerText}>Choose a mode to continue the discussion!</Text>
                 <View style={[{ width: "65%", margin: 10}]}>
                     <Button
                         title="User vs. Bot"

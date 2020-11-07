@@ -39,19 +39,19 @@ class App extends Component {
         <NavigationContainer>
           <Stack.Navigator>
             <Stack.Screen
-              name="Mode"
+              name="Home Screen"
               component={ModeScreen}
             />
             <Stack.Screen
-              name="ChooseFriendlyMode"
+              name="Choose a Friendly Mode"
               component={ChooseFriendlyModeScreen}
             />
             <Stack.Screen
-              name="ChooseDebateMode"
+              name="Choose a Critical Mode"
               component={ChooseDebateModeScreen}
             />
             <Stack.Screen
-              name="Chat"
+              name="Chat Screen"
               component={ChatScreen}
             />
           </Stack.Navigator>

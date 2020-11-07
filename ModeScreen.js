@@ -10,16 +10,18 @@ class ModeScreen extends Component {
             <View style={styles.mainContainer}>
                 <Image source={require('./public/img/welcome.gif')} style={styles.backgroundImage}/>
                 <Text style={styles.headerText}>
-                    Get started by selecting the mode of the chat bot!{"\n"}
-					<Text style = {[{fontSize: 24}]}>
-                        Hint:
+                    Get started by selecting the mode of the chat bot!{"\n\n"}
+					<Text style = {[{ fontSize: 22 }]}>
+                        Choose <Text style = {[{ color: "limegreen" }]}>Friendly Mode</Text> to relieve potential stress, anxiety, and depression from COVID or personal issues.
+                        {"\n\n"}
+                        Choose <Text style = {[{ color: "orange" }]}>Critical Mode</Text> to dig deeper into a controversial topic or simply understand conflicting viewpoints.
 				    </Text>
 				</Text>
                 <View style={[{ width: "65%", margin: 10}]}>
                     <Button
                         title="Friendly Mode"
                         onPress={() =>
-                            this.props.navigation.navigate('ChooseFriendlyMode')
+                            this.props.navigation.navigate('Choose a Friendly Mode')
                         }
 						color="limegreen"
                     />
@@ -28,7 +30,7 @@ class ModeScreen extends Component {
 					<Button
 						title="Critical Mode"
 						onPress={() =>
-							this.props.navigation.navigate('ChooseDebateMode')
+							this.props.navigation.navigate('Choose a Critical Mode')
 						}
 						color = 'orange'
                     />

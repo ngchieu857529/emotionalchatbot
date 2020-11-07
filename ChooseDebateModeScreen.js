@@ -7,12 +7,12 @@ import { ModeContext } from './ModeContext';
 class ChooseDebateModeScreen extends Component {
     updateModeDebateOne() {
         this.context.updateMode("Debate One"),
-        this.props.navigation.navigate('Chat')
+        this.props.navigation.navigate('Chat Screen')
     }
 
     updateModeDebateTwo() {
         this.context.updateMode("Debate Two"),
-        this.props.navigation.navigate('Chat')
+        this.props.navigation.navigate('Chat Screen')
     }
 
     render() {
