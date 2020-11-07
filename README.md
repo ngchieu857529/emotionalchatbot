@@ -21,6 +21,38 @@ Once you have everything configured, follow the steps below to run the app:
 => DONE! An app should appear on your Android emulator. If you are facing any issues, look up the internet to resolve the errors! Have fun chatting with the bot!
 
 ## Resources
-- PowerPoint slides: 
-- Sample video: 
+- PowerPoint slides: https://1drv.ms/p/s!AmtRtv41fFQLhfc0AkggDc3ipIjwPw?e=gM4h1j
+- Sample video: https://vimeo.com/476544586
 - Google Colaboratory bot models: 
+    Friendly Mode: https://colab.research.google.com/drive/1A3T2sWRqk6qeURpALyEYxTv_w41fr9I0?usp=sharing
+    Critical Mode:https://colab.research.google.com/drive/1wsS6uYLYzk3dcgPtOrVFVWrpAv9ZAj61?usp=sharing
+
+Friendly mode:
+2 settings:
+User vs Bot: 
+The chatbot will talk to the user mostly in the sympathetic and empathetic way.
+Helps user relieve potential stress, anxiety, and depression from COVID or personal issues.
+Bot vs Bot (automatic):
+Two separate models (trained with different personality) will have a short conversation with each other. Roles may vary.
+For example, model 1 can be a depressed person while model 2 is the therapist or a comforter. 
+
+Critical mode:
+2 settings:
+User vs Bot: 
+The chatbot will talk to the user mostly in a critical manner.
+Helps user dig deeper into a controversial topic or simply understand conflicting viewpoints.
+Bot vs Bot (automatic):
+Two separate models (trained with different perspectives) will have a short conversation with each other. Roles may vary.
+For example, model 1 can be Republican supporter while model 2 can be a Democratic supporter.
+
+References:
+https://reactnative.dev/
+https://github.com/microsoft/DialoGPT
+https://github.com/huggingface/transformers
+https://www.reddit.com/r/depression/
+https://www.reddit.com/dev/api/
+https://www.reddit.com/r/Coronavirus/
+https://pytorch.org/
+
+
+P
