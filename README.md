@@ -26,24 +26,25 @@ Once you have everything configured, follow the steps below to run the app:
 - Google Colaboratory bot models: 
     Friendly Mode: https://colab.research.google.com/drive/1A3T2sWRqk6qeURpALyEYxTv_w41fr9I0?usp=sharing
     Critical Mode:https://colab.research.google.com/drive/1wsS6uYLYzk3dcgPtOrVFVWrpAv9ZAj61?usp=sharing
-
+Features:
 Friendly mode:
 2 settings:
 User vs Bot: 
-The chatbot will talk to the user mostly in the sympathetic and empathetic way.
+The chatbot will interact with the user mostly in the sympathetic and empathetic way.
 Helps user relieve potential stress, anxiety, and depression from COVID or personal issues.
 Bot vs Bot (automatic):
 Two separate models (trained with different personality) will have a short conversation with each other. Roles may vary.
-For example, model 1 can be a depressed person while model 2 is the therapist or a comforter. 
+For example, model 1 can be a depressed person while model 2 is the therapist or a comforter (as the example below). Please note that in this case the user acts only as a Moderator or Initiator of the Conversation while the rest is automatically performed by the models).
+Disclaimer: questions asked in the examples are random and not indicative of any political bias on our side. We reserved have no political standpoints throughout this experiment. All comments hereby produced by the models are inherited by Reddit users.
 
 Critical mode:
 2 settings:
 User vs Bot: 
-The chatbot will talk to the user mostly in a critical manner.
+The chatbot will express mostly in a critical manner.
 Helps user dig deeper into a controversial topic or simply understand conflicting viewpoints.
 Bot vs Bot (automatic):
 Two separate models (trained with different perspectives) will have a short conversation with each other. Roles may vary.
-For example, model 1 can be Republican supporter while model 2 can be a Democratic supporter.
+For example, model 1 can be Republican supporter while model 2 can be a Democratic supporter. Please note that in this case the user acts only as a Moderator or Initiator of the Debate/Discussion and the rest is performed automatically performed by the models.
 
 Implementation:
 An ensemble of models was built on Google Colaboratory, consisting of 4-5 different models suitable for different knowledge domains.
