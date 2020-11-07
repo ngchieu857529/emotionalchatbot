@@ -116,10 +116,10 @@ class ChatScreen extends Component {
         };
         
         setTimeout(function(){
-			self.setState(previousState => ({
-				messages: previousState.messages.filter(message => message.id !== self.state.count)
-            }));
-            console.log(self.state.count)
+			// self.setState(previousState => ({
+			// 	messages: previousState.messages.filter(message => message.id !== self.state.count)
+            // }));
+
             self.setState(previousState => ({
 				messages: GiftedChat.append(previousState.messages, [msg])
             }));
@@ -127,11 +127,8 @@ class ChatScreen extends Component {
             self.setState({
                 canSendMessage: true,
                 hideLoading: true,
-                count: self.state.count+1
+                // count: self.state.count+1
             });
-            console.log(self.state.messages[1].text)
-            self.state.messages[1].text = 'hello'
-            console.log(self.state.messages[1].text)
             
 
         }, 3000)
@@ -167,23 +164,20 @@ class ChatScreen extends Component {
 		
             messageList.push(msg1)
             messageList.push(msg2)
-			console.log(messageList.length)
         }
-        console.log(messageList.length)
         
-        var count = 0;
         messageList.map(function(message, index) {
-            self.displayMessage(message, count);
+            self.displayMessage(message);
 
-            if (messageList[index+1] != null) {
-                if (count == 0) {
-                    self.displayIsTypingMessage(self.state.count2, self.state.currentImageTwoIndex, 1, self.returnBotTwoName(), self.returnBotTwoAvatar())
-                    count++
-                } else { //count = 1
-                    self.displayIsTypingMessage(self.state.count, self.state.currentImageIndex, 2, self.returnBotName(), self.returnBotAvatar())
-                    count--
-                }
-            }
+            // if (messageList[index+1] != null) {
+            //     if (count == 0) {
+            //         self.displayIsTypingMessage(self.state.count2, self.state.currentImageTwoIndex, 1, self.returnBotTwoName(), self.returnBotTwoAvatar())
+            //         count++
+            //     } else { //count = 1
+            //         self.displayIsTypingMessage(self.state.count, self.state.currentImageIndex, 2, self.returnBotName(), self.returnBotAvatar())
+            //         count--
+            //     }
+            // }
         })
         this.setState({
             canSendMessage: true,
@@ -210,26 +204,24 @@ class ChatScreen extends Component {
 	displayMessage(message, count) {
         var self = this
 		setTimeout(function(){
-            if (count == 0) {
-                self.setState(previousState => ({
-                    messages: previousState.messages.filter(message => message.id !== self.state.count)
-                }));
-                console.log('deleting' + self.state.count)
-                self.setState({
-                    count: self.state.count++,
-                })
-            } else { //count = 1
-                self.setState(previousState => ({
-                    messages: previousState.messages.filter(message => message.id !== self.state.count2)
-                }));
-                console.log('deleting' + self.state.count2)
+            // if (count == 0) {
+            //     self.setState(previousState => ({
+            //         messages: previousState.messages.filter(message => message.id !== self.state.count)
+            //     }));
+            //     console.log('deleting' + self.state.count)
+            //     self.setState({
+            //         count: self.state.count++,
+            //     })
+            // } else { //count = 1
+            //     self.setState(previousState => ({
+            //         messages: previousState.messages.filter(message => message.id !== self.state.count2)
+            //     }));
+            //     console.log('deleting' + self.state.count2)
 
-                self.setState({
-                    count2:self.state.count2++
-                })
-            }
-
-            
+            //     self.setState({
+            //         count2:self.state.count2++
+            //     })
+            // }
 
 			self.setState(previousState => ({
 				messages: GiftedChat.append(previousState.messages, [message])
@@ -238,22 +230,22 @@ class ChatScreen extends Component {
 		}, 3000)
     }
     
-    displayIsTypingMessage(msg_id, index, user_id, returnNameFunc, returnAvatarFunc) {
-        let isTypingMsg = {
-            _id: msg_id,
-            text: botProfiles[index][0] + ' is typing...',
-            createdAt: new Date(),
-            user: {
-                _id: user_id,
-                name: returnNameFunc,
-                avatar: returnAvatarFunc
-            }
-        };
-        this.setState(previousState => ({
-            messages: GiftedChat.append(previousState.messages, [isTypingMsg])
-        }));
+    // displayIsTypingMessage(msg_id, index, user_id, returnNameFunc, returnAvatarFunc) {
+    //     let isTypingMsg = {
+    //         _id: msg_id,
+    //         text: botProfiles[index][0] + ' is typing...',
+    //         createdAt: new Date(),
+    //         user: {
+    //             _id: user_id,
+    //             name: returnNameFunc,
+    //             avatar: returnAvatarFunc
+    //         }
+    //     };
+    //     this.setState(previousState => ({
+    //         messages: GiftedChat.append(previousState.messages, [isTypingMsg])
+    //     }));
 
-    }
+    // }
 
     onSend(messages = []) {
         var self = this;
@@ -276,7 +268,7 @@ class ChatScreen extends Component {
 			messages: GiftedChat.append(previousState.messages, messages)
         }));
         
-        this.displayIsTypingMessage(this.state.count, this.state.currentImageIndex, 2, this.returnBotName(), this.returnBotAvatar())
+        // this.displayIsTypingMessage(this.state.count, this.state.currentImageIndex, 2, this.returnBotName(), this.returnBotAvatar())
 		
         this.setState({
             canSendMessage: false,
@@ -440,7 +432,7 @@ const styles = StyleSheet.create({
 		left: 130,
 		bottom: 100,
         right: 0,
-        opacity: 1 ,
+        opacity: 1,
     },
 })
 
