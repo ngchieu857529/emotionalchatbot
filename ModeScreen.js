@@ -10,11 +10,12 @@ class ModeScreen extends Component {
             <View style={styles.mainContainer}>
                 <Image source={require('./public/img/welcome.gif')} style={styles.backgroundImage}/>
                 <Text style={styles.headerText}>
-                    Get started by selecting the mode of the chat bot!{"\n\n"}
+                    Welcome to <Text style = {[{ color: "#00FFFF", fontSize: 35}]}>Soulful</Text><Text style = {[{ color: "black", fontSize: 35}]}>.AI</Text>! {"\n"} Get started by selecting the most suitable mode for you at the moment!{"\n\n"}
 					<Text style = {[{ fontSize: 22 }]}>
-                        Choose <Text style = {[{ color: "limegreen" }]}>Friendly Mode</Text> to relieve potential stress, anxiety, and depression from COVID or personal issues.
+                        Choose <Text style = {[{ color: "limegreen" }]}>Friendly Mode</Text> to have a little getaway from all the stress with one of our intimate agents.
                         {"\n\n"}
-                        Choose <Text style = {[{ color: "orange" }]}>Critical Mode</Text> to dig deeper into a controversial topic or simply understand conflicting viewpoints.
+                        Choose <Text style = {[{ color: "orange" }]}>Critical Mode</Text> to meet a more critical representative and immerse yourself into the arguments!{"\n"}You have been warned.
+
 				    </Text>
 				</Text>
                 <View style={[{ width: "65%", margin: 10}]}>

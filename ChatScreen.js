@@ -433,14 +433,14 @@ const styles = StyleSheet.create({
         opacity: 0.5,
     },
     gifImage: {
-        width: "50%",
-        height: "50%",
+        width: 150,
+        height: 100,
 		position: "absolute",
 		top: 100,
-		left: 0,
+		left: 130,
 		bottom: 100,
         right: 0,
-        opacity: 0.5,
+        opacity: 1 ,
     },
 })
 
